@@ -96,6 +96,12 @@
     <ClCompile Include="src\graphics\cameras\c3rdPersonCamera.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="particle_force_generators.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="cParticleContact.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\physics\cParticle.h">
@@ -190,6 +196,18 @@
     </ClInclude>
     <ClInclude Include="include\graphics\cameras\c3rdPersonCamera.h">
       <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="iParticleForceGenerator.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="particle_force_generators.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="iParticleContactGenerator.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="cParticleContact.h">
+      <Filter>Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -8,15 +8,9 @@ namespace nPhysics
 		, mAcceleration(0.f)
 		, mDamping(0.995f)
 		, mAppliedForce(0.f)
+		, mIsAlive(true)
 	{
-		if (mass <= 0.f)
-		{
-			mInverseMass = 0.f;
-		}
-		else
-		{
-			mInverseMass = 1.f / mass;
-		}
+		SetMass(mass);
 	}
 	cParticle::~cParticle()
 	{
@@ -107,6 +101,12 @@ namespace nPhysics
 	{
 		mAppliedForce += force;
 	}
+
+	void cParticle::ApplyImpulse(const glm::vec3& impulse)
+	{
+		mVelocity += impulse * mInverseMass;
+	}
+
 	void cParticle::ClearAppliedForces()
 	{
 		glm::set(mAppliedForce, 0.f, 0.f, 0.f);
@@ -128,5 +128,15 @@ namespace nPhysics
 
 		// clear applied forces
 		ClearAppliedForces();
+	}
+
+	void cParticle::SetIsAlive(bool isAlive)
+	{
+		mIsAlive = isAlive;
+	}
+
+	bool cParticle::GetIsAlive() const
+	{
+		return mIsAlive;
 	}
 }
