@@ -142,9 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cParticleContact.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="particle_force_generators.cpp" />
     <ClCompile Include="src\graphics\cameras\c3rdPersonCamera.cpp" />
     <ClCompile Include="src\graphics\cBuffer.cpp" />
     <ClCompile Include="src\graphics\cCamera.cpp" />
@@ -167,10 +165,13 @@
     <ClCompile Include="src\input\cKey.cpp" />
     <ClCompile Include="src\input\input.cpp" />
     <ClCompile Include="src\physics\cParticle.cpp" />
+    <ClCompile Include="src\physics\cParticleContact.cpp" />
+    <ClCompile Include="src\physics\cParticleContactResolver.cpp" />
+    <ClCompile Include="src\physics\cParticleForceRegistry.cpp" />
     <ClCompile Include="src\physics\cParticleWorld.cpp" />
+    <ClCompile Include="src\physics\particle_force_generators.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cParticleContact.h" />
     <ClInclude Include="include\extern_includes.h" />
     <ClInclude Include="include\graphics\cameras\c3rdPersonCamera.h" />
     <ClInclude Include="include\graphics\cBuffer.h" />
@@ -201,10 +202,13 @@
     <ClInclude Include="include\input\input.h" />
     <ClInclude Include="include\input\input_keys.h" />
     <ClInclude Include="include\physics\cParticle.h" />
+    <ClInclude Include="include\physics\cParticleContact.h" />
+    <ClInclude Include="include\physics\cParticleContactResolver.h" />
+    <ClInclude Include="include\physics\cParticleForceRegistry.h" />
     <ClInclude Include="include\physics\cParticleWorld.h" />
-    <ClInclude Include="iParticleContactGenerator.h" />
-    <ClInclude Include="iParticleForceGenerator.h" />
-    <ClInclude Include="particle_force_generators.h" />
+    <ClInclude Include="include\physics\iParticleContactGenerator.h" />
+    <ClInclude Include="include\physics\iParticleForceGenerator.h" />
+    <ClInclude Include="include\physics\particle_force_generators.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,4 +1,4 @@
-#include "cParticleContact.h"
+#include <physics/cParticleContact.h>
 
 namespace nPhysics
 {

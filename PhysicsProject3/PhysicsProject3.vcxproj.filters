@@ -96,10 +96,16 @@
     <ClCompile Include="src\graphics\cameras\c3rdPersonCamera.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="particle_force_generators.cpp">
+    <ClCompile Include="src\physics\cParticleContact.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="cParticleContact.cpp">
+    <ClCompile Include="src\physics\cParticleContactResolver.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\physics\particle_force_generators.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\physics\cParticleForceRegistry.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
   </ItemGroup>
@@ -197,16 +203,22 @@
     <ClInclude Include="include\graphics\cameras\c3rdPersonCamera.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="iParticleForceGenerator.h">
+    <ClInclude Include="include\physics\cParticleContact.h">
       <Filter>Physics</Filter>
     </ClInclude>
-    <ClInclude Include="particle_force_generators.h">
+    <ClInclude Include="include\physics\cParticleContactResolver.h">
       <Filter>Physics</Filter>
     </ClInclude>
-    <ClInclude Include="iParticleContactGenerator.h">
+    <ClInclude Include="include\physics\iParticleContactGenerator.h">
       <Filter>Physics</Filter>
     </ClInclude>
-    <ClInclude Include="cParticleContact.h">
+    <ClInclude Include="include\physics\iParticleForceGenerator.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\physics\particle_force_generators.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\physics\cParticleForceRegistry.h">
       <Filter>Physics</Filter>
     </ClInclude>
   </ItemGroup>

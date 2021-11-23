@@ -1,4 +1,4 @@
-#include "particle_force_generators.h"
+#include <physics/particle_force_generators.h>
 
 namespace nPhysics
 {
