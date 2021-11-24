@@ -108,6 +108,9 @@
     <ClCompile Include="src\physics\cParticleForceRegistry.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
+    <ClCompile Include="src\physics\particle_contact_generators.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\physics\cParticle.h">
@@ -219,6 +222,9 @@
       <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="include\physics\cParticleForceRegistry.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\physics\particle_contact_generators.h">
       <Filter>Physics</Filter>
     </ClInclude>
   </ItemGroup>

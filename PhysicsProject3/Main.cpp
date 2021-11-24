@@ -40,7 +40,7 @@ nGraphics::cGraphicsComponent* skyboxGraphics;
 nGraphics::cGraphicsComponent* planeGraphics;
 nGraphics::cGraphicsComponent* rockGraphics;
 
-nGraphics::cGraphicsComponent* cannonGraphics;
+//nGraphics::cGraphicsComponent* cannonGraphics;
 #pragma endregion
 
 int main()
@@ -96,12 +96,12 @@ int main()
 		loadingInfo.SubMeshes[0].Name = "box";
 		infos.push_back(loadingInfo);
 
-		//Cannon
-		loadingInfo.File = "../Assets/Cannon.obj";
-		loadingInfo.DoResize = true;
-		loadingInfo.Extents = glm::vec3(0.1f, 0.1f, 0.1f);
-		loadingInfo.SubMeshes[0].Name = "cannon";
-		infos.push_back(loadingInfo);
+		////Cannon
+		//loadingInfo.File = "../Assets/Cannon.obj";
+		//loadingInfo.DoResize = true;
+		//loadingInfo.Extents = glm::vec3(0.1f, 0.1f, 0.1f);
+		//loadingInfo.SubMeshes[0].Name = "cannon";
+		//infos.push_back(loadingInfo);
 
 		if (!nGraphics::gMeshManager->Load(infos))
 		{
@@ -132,18 +132,18 @@ int main()
 		graphicsDef.TexDiffuse = "grafitti";
 		glm::set(graphicsDef.ModelColor, 1.0f, 1.0f, 1.0f, 1.0f);
 		glm::set(graphicsDef.Position, 0.0f, -0.2f, 0.0f);
-		glm::set(graphicsDef.Scale, 10.0f, 0.2f, 10.0f);
+		glm::set(graphicsDef.Scale, 100.0f, 0.002f, 100.0f);
 		planeGraphics = new nGraphics::cGraphicsComponent(graphicsDef);
 	}
 	//Cannon
-	nGraphics::sGraphicsComponentDef graphicsDef;
+	/*nGraphics::sGraphicsComponentDef graphicsDef;
 	graphicsDef.Mesh = "cannon";
 	graphicsDef.TexDiffuse = "white";
 	glm::set(graphicsDef.ModelColor, 0.0f, 0.0f, 0.0f, 1.0f);
 	glm::set(graphicsDef.Position, 0.5f, 0.0f, 0.5f);
 	glm::set(graphicsDef.Rotation, -1.57f, 0.f, 0.f);
 	glm::set(graphicsDef.Scale, 20.f, 20.1f, 20.1f);
-	cannonGraphics = new nGraphics::cGraphicsComponent(graphicsDef);
+	cannonGraphics = new nGraphics::cGraphicsComponent(graphicsDef);*/
 
 	// Enter the main loop
 	mainLoop();
@@ -152,7 +152,7 @@ int main()
 	delete planeGraphics;
 	delete rockGraphics;
 	delete skyboxGraphics;
-	delete cannonGraphics;
+	//delete cannonGraphics;
 	delete camera;
 
 	nGraphics::Shutdown();
@@ -205,8 +205,9 @@ void mainLoop()
 
 	//Setup projectile
 	sConfig projectileConfig;
-	////Setup cannon
 
+	//Setup cannon
+#pragma region CannonStuff
 	float cannonYaw = 0.3f;
 	float cannonPitch = 10.0f;
 	float* pCannonYaw = &cannonYaw;
@@ -215,12 +216,15 @@ void mainLoop()
 	float maxYaw = 1.0f;
 	float minPitch = 0.5f;
 	float maxPitch = 26.0f;
+#pragma endregion
+
 	bool continueMainLoop = true;
 
 	float previousTime = static_cast<float>(glfwGetTime());
 
 	//World Setup
-	nPhysics::cParticleWorld* world = new nPhysics::cParticleWorld();
+	//Added interactions
+	nPhysics::cParticleWorld* world = new nPhysics::cParticleWorld(100,0);
 	nPhysics::cParticle* particle = new nPhysics::cParticle(1.0f, glm::vec3(0.f));
 	if (world->AddParticle(particle))
 	{
@@ -243,9 +247,9 @@ void mainLoop()
 	bool inFlight = false;
 #pragma region Keys
 	nInput::cKey* Key1 = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_1);
-	nInput::cKey* Key2 = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_2);
-	nInput::cKey* Key3 = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_3);
-	nInput::cKey* Key4 = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_4);
+	//nInput::cKey* Key2 = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_2);
+	//nInput::cKey* Key3 = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_3);
+	//nInput::cKey* Key4 = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_4);
 	nInput::cKey* wKey = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_W);
 	nInput::cKey* aKey = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_A);
 	nInput::cKey* sKey = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_S);
@@ -379,7 +383,7 @@ void mainLoop()
 		glm::set(rockGraphics->GetVars()->ModelColor, 1.0f, 1.0f, 1.0f);
 		
 		rockGraphics->Render();
-		cannonGraphics->Render();
+		//cannonGraphics->Render();
 
 		nGraphics::EndFrame();
 
