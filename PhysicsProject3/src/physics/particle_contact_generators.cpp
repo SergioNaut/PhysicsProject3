@@ -2,7 +2,7 @@
 
 namespace nPhysics
 {
-	//TODO: add stuff for correct particle generator
+	//TODO: add stuff for correct particle contact generator
 	cPlaneParticleContactGenerator::cPlaneParticleContactGenerator(glm::vec3 nNormal,float dDistance, float sSphereRadius)
 	{
 		mNormal = nNormal;
@@ -36,7 +36,8 @@ namespace nPhysics
 				contact->mParticle0 = *p;
 				contact->mParticle1 = nullptr;
 				//I think that's correct
-				contact->mPenetration = sphereRadius - distance;
+				//contact->mPenetration = sphereRadius - distance /*particleDistance*/;
+				contact->mPenetration = sphereRadius - particleDistance;
 				//Generic restitution for now
 				contact->mRestitution = 0.7f;
 				contact++;
