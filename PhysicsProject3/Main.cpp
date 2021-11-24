@@ -27,12 +27,7 @@ struct sConfig
 	sProjectileDef ProjectileDef;
 };
 
-#pragma region BitsfromProject1
-
-bool particleIsAboveGround(glm::vec3& position);
-
 void mainLoop();
-#pragma endregion
 
 #pragma region CameraSetup
 nGraphics::sPerFrameVars PerFrameVars;
@@ -415,38 +410,59 @@ void mainLoop()
 	float fpsFrameCount = 0.f;
 	float fpsTimeElapsed = 0.f;
 
+//Setup cannon
+#pragma region CannonStuff
+	float cannonYaw = 0.3f;
+	float cannonPitch = 10.0f;
+	float* pCannonYaw = &cannonYaw;
+	float* pCannonPitch = &cannonPitch;
+	float minYaw = -1.0f;
+	float maxYaw = 1.0f;
+	float minPitch = 0.5f;
+	float maxPitch = 26.0f;
+#pragma endregion
+
 	// BEGIN PROJECT 3 SETUP
 	std::vector<nPhysics::cParticle*> particles;
 	nPhysics::cParticleWorld* world = new nPhysics::cParticleWorld(100, 0);
 	//Particle variables
 	glm::vec4 particleColor(1.0f, 1.0f, 1.0f, 1.0f);
 	float particleRadius(1.0f);
-
-	//TODO: Fix this
+#pragma region Planes
 	//TODO: Add all planes
 	//Ground Plane
 	nPhysics::cPlaneParticleContactGenerator particleContactGeneratorG(glm::vec3 (0.0f,1.f,0.0f),1.0f,1.0f);
 	world->AddContactContactGenerator(&particleContactGeneratorG);
 
 	//Left Wall
-	nPhysics::cPlaneParticleContactGenerator particleContactGeneratorLeft(glm::vec3(1.0f, 0.f, 0.0f), -5.0f, 1.0f);
+	nPhysics::cPlaneParticleContactGenerator particleContactGeneratorLeft(glm::vec3(1.0f, 0.f, 0.0f), -10.0f, 1.0f);
 	world->AddContactContactGenerator(&particleContactGeneratorLeft);
 
 	//Right Wall
-	nPhysics::cPlaneParticleContactGenerator particleContactGeneratorRight(glm::vec3(-1.0f, 0.f, 0.0f), -5.0f, 1.0f);
+	nPhysics::cPlaneParticleContactGenerator particleContactGeneratorRight(glm::vec3(-1.0f, 0.f, 0.0f), -10.0f, 1.0f);
 	world->AddContactContactGenerator(&particleContactGeneratorRight);
 
-	////Back Wall
-	//nPhysics::cPlaneParticleContactGenerator particleContactGeneratorBack(glm::vec3(0.0f, 0.f, -2.0f), -5.0f, 1.0f);
-	//world->AddContactContactGenerator(&particleContactGeneratorBack);
+	//Back Wall
+	nPhysics::cPlaneParticleContactGenerator particleContactGeneratorBack(glm::vec3(0.0f, 0.f, -2.0f), -10.0f, 1.0f);
+	world->AddContactContactGenerator(&particleContactGeneratorBack);
 
 	////Roof
 	//nPhysics::cPlaneParticleContactGenerator particleContactGeneratorRoof(glm::vec3(1.0f, 5.f, 0.0f), -5.0f, 1.0f);
 	//world->AddContactContactGenerator(&particleContactGeneratorRoof);
 
-	nInput::cKey* key1 = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_1);
-	//nInput::cKey* key2 = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_2);
+	//Front Wall
+	nPhysics::cPlaneParticleContactGenerator particleContactGeneratorFront(glm::vec3(0.0f, 0.f, 1.0f), -10.0f, 1.0f);
+	world->AddContactContactGenerator(&particleContactGeneratorFront);
+#pragma endregion
 
+#pragma region KeySetup
+	nInput::cKey* key1 = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_1);
+	nInput::cKey* wKey = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_W);
+	nInput::cKey* aKey = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_A);
+	nInput::cKey* sKey = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_S);
+	nInput::cKey* dKey = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_D);
+	//nInput::cKey* key2 = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_2);
+#pragma endregion
 
 	while (continueMainLoop)
 	{
@@ -472,13 +488,66 @@ void mainLoop()
 
 		if (key1->IsJustPressed())
 		{
+			//TODO: Cannon stuff
+			glm::mat3 rotMat = rotationMatrix(cannonYaw, cannonPitch);
 			nPhysics::cParticle* particleP = new nPhysics::cParticle(1.0f, glm::vec3(0.f, 1.5f, 0.f));
 			particleP->SetAcceleration(glm::vec3(0.0f, -9.8f, 0.0f));
-			glm::vec3 randomVelocity(getRandom(-3.0f, 3.0f), 10.0f, getRandom(-3.0f, 3.0f));
+			//TODO: Change velocity with rotMat
+			//glm::vec3 randomVelocity(getRandom(-3.0f, 3.0f), 10.0f, getRandom(-3.0f, 3.0f));
+			glm::vec3 randomVelocity((rotMat[0] * 3.0f) + (rotMat[1] * 10.0f) + (rotMat[2] * 3.0f));
 			particleP->SetVelocity(randomVelocity);
 			world->AddParticle(particleP);
 			particles.push_back(particleP);
 		}
+		else if (aKey->IsJustPressed())
+		{
+		if (cannonPitch < maxPitch)
+		{
+			cannonPitch += 1.0f;
+		}
+		if (cannonPitch > maxPitch)
+		{
+			cannonPitch = maxPitch;
+		}
+		std::cout << cannonPitch << std::endl;
+		}
+		else if (sKey->IsJustPressed())
+		{
+			if (cannonYaw > minYaw)
+			{
+				cannonYaw -= 0.3f;
+			}
+			if (cannonYaw < minYaw)
+			{
+				cannonYaw = minYaw;
+			}
+		std::cout << cannonYaw << std::endl;
+		}
+		else if (dKey->IsJustPressed())
+		{
+			if (cannonPitch > minPitch)
+			{
+				cannonPitch -= 1.0f;
+			}
+			if (cannonPitch < minPitch)
+			{
+				cannonPitch = minPitch;
+			}
+			std::cout << cannonPitch << std::endl;
+		}
+		else if (wKey->IsJustPressed())
+		{
+			if (cannonYaw < maxYaw)
+			{
+				cannonYaw += 0.3f;
+			}
+			if (cannonYaw > maxYaw)
+			{
+				cannonYaw = maxYaw;
+			}
+			std::cout << cannonYaw << std::endl;
+		}
+	
 
 		world->TimeStep(deltaTime);
 
@@ -523,7 +592,7 @@ void mainLoop()
 
 
 		// clean up any dead particles
-		for (std::vector<nPhysics::cParticle*>::iterator it = particles.begin(); it != particles.end(); )
+		/*for (std::vector<nPhysics::cParticle*>::iterator it = particles.begin(); it != particles.end(); )
 		{
 			if ((*it)->GetIsAlive())
 			{
@@ -537,7 +606,7 @@ void mainLoop()
 				world->RemoveParticle(deadParticle);
 				delete deadParticle;
 			}
-		}
+		}*/
 
 
 		// Exit conditions: press escape or close the window by the 'x' button
