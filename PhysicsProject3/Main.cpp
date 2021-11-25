@@ -32,12 +32,19 @@ void mainLoop();
 #pragma region CameraSetup
 nGraphics::sPerFrameVars PerFrameVars;
 nGraphics::c3rdPersonCamera* camera = 0;
+#pragma endregion
+
+#pragma region GraphicsStuff
 nGraphics::cGraphicsComponent* skyboxGraphics;
 nGraphics::cGraphicsComponent* planeGraphics;
 nGraphics::cGraphicsComponent* rockGraphics;
 
-//nGraphics::cGraphicsComponent* cannonGraphics;
+nGraphics::cGraphicsComponent* wallGraphics1;
+nGraphics::cGraphicsComponent* wallGraphics2;
+nGraphics::cGraphicsComponent* wallGraphics3;
+nGraphics::cGraphicsComponent* wallGraphics4;
 #pragma endregion
+//nGraphics::cGraphicsComponent* cannonGraphics;
 
 //Helper function
 float getRandom(float low, float high);
@@ -134,6 +141,47 @@ int main()
 		glm::set(graphicsDef.Scale, 100.0f, 0.002f, 100.0f);
 		planeGraphics = new nGraphics::cGraphicsComponent(graphicsDef);
 	}
+	{
+		//Wall Graphics Component
+		nGraphics::sGraphicsComponentDef graphicsDef;
+		graphicsDef.Mesh = "box";
+		graphicsDef.TexDiffuse = "grafitti";
+		glm::set(graphicsDef.ModelColor, 1.0f, 1.0f, 1.0f, 1.0f);
+		glm::set(graphicsDef.Position, 10.0f, 1.0f, -10.0f);
+		glm::set(graphicsDef.Scale, 20.0f, 8.0f, 1.0f);
+		wallGraphics1 = new nGraphics::cGraphicsComponent(graphicsDef);
+	}
+	{
+		//Wall Graphics Component
+		nGraphics::sGraphicsComponentDef graphicsDef;
+		graphicsDef.Mesh = "box";
+		graphicsDef.TexDiffuse = "grafitti";
+		glm::set(graphicsDef.ModelColor, 1.0f, 1.0f, 1.0f, 1.0f);
+		glm::set(graphicsDef.Position, -10.0f, 1.0f, 10.0f);
+		glm::set(graphicsDef.Scale, 20.0f, 8.0f, 1.0f);
+		wallGraphics2 = new nGraphics::cGraphicsComponent(graphicsDef);
+	}
+	{
+		//Wall Graphics Component
+		nGraphics::sGraphicsComponentDef graphicsDef;
+		graphicsDef.Mesh = "box";
+		graphicsDef.TexDiffuse = "grafitti";
+		glm::set(graphicsDef.ModelColor, 1.0f, 1.0f, 1.0f, 1.0f);
+		glm::set(graphicsDef.Position, -10.0f, 1.0f, 10.0f);
+		glm::set(graphicsDef.Scale, 1.0f, 8.0f, 20.0f);
+		wallGraphics3 = new nGraphics::cGraphicsComponent(graphicsDef);
+	}
+	{
+		//Wall Graphics Component
+		nGraphics::sGraphicsComponentDef graphicsDef;
+		graphicsDef.Mesh = "box";
+		graphicsDef.TexDiffuse = "grafitti";
+		glm::set(graphicsDef.ModelColor, 1.0f, 1.0f, 1.0f, 1.0f);
+		glm::set(graphicsDef.Position, 10.0f, 1.0f, -10.0f);
+		glm::set(graphicsDef.Scale, 1.0f, 8.0f,	20.0f);
+		wallGraphics4 = new nGraphics::cGraphicsComponent(graphicsDef);
+	}
+
 	//Cannon
 	/*nGraphics::sGraphicsComponentDef graphicsDef;
 	graphicsDef.Mesh = "cannon";
@@ -151,6 +199,10 @@ int main()
 	delete planeGraphics;
 	delete rockGraphics;
 	delete skyboxGraphics;
+	delete wallGraphics1;
+	delete wallGraphics2;
+	delete wallGraphics3;
+	delete wallGraphics4;
 	//delete cannonGraphics;
 	delete camera;
 
@@ -161,7 +213,7 @@ int main()
 #pragma endregion
 }
 
-//TODO: MAKE CANNON ROTATION WORK
+#pragma region RotationBits
 glm::mat3 yawMatrix(float yaw)
 {
 	return glm::mat3(cos(yaw), sin(yaw), 0, -sin(yaw), cos(yaw), 0, 0, 0, 1);
@@ -176,226 +228,7 @@ glm::mat3 rotationMatrix(float yaw, float pitch)
 {
 	return yawMatrix(yaw) * pitchMatrix(pitch);
 }
-
-
-void InitProjectileVariables(float yaw, float pitch, glm::vec3& position, glm::vec3& velocity, glm::vec3& acceleration,
-	float size, float muzzle, float gravity)
-{
-	glm::mat3 rotMat = rotationMatrix(yaw, pitch);
-	//Added size so projectile won't get stuck on the ground
-	position = glm::vec3(0.0, size, 0.0);
-	//velocity = glm::vec3(7.0f, 10.f, 0.f);
-	velocity = glm::vec3((rotMat[0] * 7.0f) + (rotMat[1] * 10.f) + (rotMat[2] * 0.f));
-	velocity = glm::normalize(velocity);
-
-	//Added Muzzle to velocity
-	velocity *= muzzle;
-
-	// Added custom gravity
-	acceleration = glm::vec3(0.f, -9.8f * gravity, 0.f);
-}
-
-
-//void mainLoop()
-//{
-//	nInput::gInputManager->ClearState();
-//
-//	nGraphics::Focus();
-//
-//	//Setup projectile
-//	sConfig projectileConfig;
-//
-//	//Setup cannon
-//#pragma region CannonStuff
-//	float cannonYaw = 0.3f;
-//	float cannonPitch = 10.0f;
-//	float* pCannonYaw = &cannonYaw;
-//	float* pCannonPitch = &cannonPitch;
-//	float minYaw = -1.0f;
-//	float maxYaw = 1.0f;
-//	float minPitch = 0.5f;
-//	float maxPitch = 26.0f;
-//#pragma endregion
-//
-//	bool continueMainLoop = true;
-//
-//	float previousTime = static_cast<float>(glfwGetTime());
-//
-//	//World Setup
-//	//Added interactions
-//	std::vector < nPhysics::cParticle*> particles;
-//	nPhysics::cParticleWorld* world = new nPhysics::cParticleWorld(100,0);
-//	/*nPhysics::cParticle* particle = new nPhysics::cParticle(1.0f, glm::vec3(0.f));
-//	if (world->AddParticle(particle))
-//	{
-//		std::cout << "Particle Added!" << std::endl;
-//	}
-//	else
-//	{
-//		std::cout << "Error adding particle." << std::endl;
-//	}
-//	glm::mat3 axes;*/
-//
-//	glm::vec3 position;
-//	glm::vec3 velocity;
-//	glm::vec3 acceleration;
-//	float timeElapsed = 0;
-//
-//	/*particle->SetPosition(position);
-//	particle->SetVelocity(velocity);
-//	particle->SetAcceleration(acceleration);
-//	bool inFlight = false;*/
-//#pragma region Keys
-//	nInput::cKey* Key1 = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_1);
-//	nInput::cKey* wKey = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_W);
-//	nInput::cKey* aKey = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_A);
-//	nInput::cKey* sKey = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_S);
-//	nInput::cKey* dKey = nInput::cInputManager::GetInstance()->ListenToKey(nInput::KeyCode::KEY_D);
-//#pragma endregion
-//
-//	while (continueMainLoop)
-//	{
-//		float currentTime = static_cast<float>(glfwGetTime());
-//		float deltaTime = currentTime - previousTime;
-//		previousTime = currentTime;
-//
-//
-//		if (!inFlight)
-//		{
-//			if (Key1->IsJustPressed())
-//			{
-//				//Basic Config for the projectile
-//				//TODO: Take out if not needed 
-//				projectileConfig.ProjectileDef.size = 2.0f;
-//				projectileConfig.ProjectileDef.mass = 1.0f;
-//				projectileConfig.ProjectileDef.muzzle = 10.0f;
-//				projectileConfig.ProjectileDef.gravity = 1.0f;
-//				projectileConfig.ProjectileDef.lifetime = 10000.0f;
-//
-//				InitProjectileVariables(cannonYaw, cannonPitch, position, velocity, acceleration,
-//					projectileConfig.ProjectileDef.size, projectileConfig.ProjectileDef.muzzle, projectileConfig.ProjectileDef.gravity);
-//				particle->SetMass(projectileConfig.ProjectileDef.mass);
-//				particle->SetPosition(position);
-//				particle->SetVelocity(velocity);
-//				particle->SetAcceleration(acceleration);
-//				inFlight = true;
-//			}
-//			else if (aKey->IsJustPressed())
-//			{
-//				if (cannonPitch < maxPitch)
-//				{
-//					cannonPitch += 1.0f;
-//
-//				}
-//				if (cannonPitch > maxPitch)
-//				{
-//					cannonPitch = maxPitch;
-//				}
-//				std::cout << cannonPitch << std::endl;
-//			}
-//			else if (sKey->IsJustPressed())
-//			{
-//				if (cannonYaw > minYaw)
-//				{
-//					cannonYaw -= 0.3f;
-//				}
-//				if (cannonYaw < minYaw)
-//				{
-//					cannonYaw = minYaw;
-//				}
-//				std::cout << cannonYaw << std::endl;
-//			}
-//			else if (dKey->IsJustPressed())
-//			{
-//				if (cannonPitch > minPitch)
-//				{
-//					cannonPitch -= 1.0f;
-//				}
-//				if (cannonPitch < minPitch)
-//				{
-//					cannonPitch = minPitch;
-//				}
-//				std::cout << cannonPitch << std::endl;
-//			}
-//			else if (wKey->IsJustPressed())
-//			{
-//				if (cannonYaw < maxYaw)
-//				{
-//					cannonYaw += 0.3f;
-//				}
-//				if (cannonYaw > maxYaw)
-//				{
-//					cannonYaw = maxYaw;
-//				}
-//				std::cout << cannonYaw << std::endl;
-//			}
-//		}
-//
-//		particle->GetPosition(position);
-//		particle->GetVelocity(velocity);
-//		particle->GetAcceleration(acceleration);
-//
-//		if (inFlight)
-//		{
-//			if (particleIsAboveGround(position))
-//			{
-//				world->TimeStep(deltaTime);
-//				projectileConfig.ProjectileDef.lifetime--;
-//				if (projectileConfig.ProjectileDef.lifetime <= 0)
-//				{
-//					inFlight = false;
-//				}
-//			}
-//			else
-//			{
-//				inFlight = false;
-//				std::cout << "It`s done" << std::endl;
-//			}
-//		}
-//
-//		if (deltaTime == 0.f)
-//		{
-//			deltaTime = 0.03f;
-//		}
-//
-//		// update the camera
-//		camera->Update(deltaTime);
-//
-//		// done with all the updates involving input, so clear it out
-//		nInput::gInputManager->ClearState();
-//
-//		// begin setting per-frame vars
-//		camera->GetEyePosition(PerFrameVars.EyePosition);
-//		camera->GetViewMatrix(PerFrameVars.ViewMatrix);
-//		camera->GetProjectionMatrix(PerFrameVars.ProjectionMatrix);
-//		// end setting per-frame vars
-//
-//		nGraphics::BeginFrame(PerFrameVars);
-//
-//		planeGraphics->Render();
-//		rockGraphics->GetVars()->ModelMatrix = glm::translate(glm::mat4(1.0f), position);
-//		//cannonGraphics->GetVars()->ModelMatrix = glm::rotateY(glm::vec3(0.f, 1.0f, 0.f),1.57f);
-//		//Different Projectile Colors
-//		//Gray bullet
-//		glm::set(rockGraphics->GetVars()->ModelColor, 1.0f, 1.0f, 1.0f);
-//		
-//		rockGraphics->Render();
-//		//cannonGraphics->Render();
-//
-//		nGraphics::EndFrame();
-//
-//		// Exit conditions: press escape or close the window by the 'x' button
-//		if (!(nInput::IsKeyUp::Escape() && !nGraphics::WindowShouldClose()))
-//		{
-//			continueMainLoop = false;
-//		}
-//	}
-//
-//	// clean up!
-//	world->RemoveParticle(particle);
-//	delete particle;
-//	delete world;
-//}
+#pragma endregion
 
 void mainLoop()
 {
@@ -574,6 +407,10 @@ void mainLoop()
 		// begin per-item rendering
 		skyboxGraphics->Render();
 		planeGraphics->Render();
+		wallGraphics1->Render();
+		wallGraphics2->Render();
+		wallGraphics3->Render();
+		wallGraphics4->Render();
 
 		// render the projectiles
 		for (nPhysics::cParticle* p : particles)
