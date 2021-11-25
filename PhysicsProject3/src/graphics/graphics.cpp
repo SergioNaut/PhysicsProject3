@@ -1,8 +1,7 @@
 #include <graphics/graphics.h>
-
-
-// std
 #include <iostream>
+
+//Leaving basic graphics stuff with only a feel changes
 
 namespace nGraphics
 {
@@ -37,8 +36,6 @@ namespace nGraphics
 	{
 		gMatrixStack.clear();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		//gShader->Bind();
-		//gShader->SetUniforms_PerFrame(perFrameVars);
 		gLitShader->Bind();
 		glm::vec3 eyePos(perFrameVars.EyePosition.x, perFrameVars.EyePosition.y, perFrameVars.EyePosition.z);
 		gLitShader->SetUniforms_PerFrame(perFrameVars.ViewMatrix, perFrameVars.ProjectionMatrix, eyePos, gLights);
@@ -101,19 +98,19 @@ namespace nGraphics
 	{
 		if (!glfwInit())
 		{
-			std::cout << "Error initializinh GLFW" << std::endl;
+			std::cout << "Error initializing GLFW" << std::endl;
 			return false;
 		}
 		glfwWindowHint(GLFW_SAMPLES, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
+		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // Needed only for Mac-OS
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		
 		// Open a window and create its OpenGL context
 		int initWidth = 1024;
 		int initHeight = 768;
-		gWindow = glfwCreateWindow(initWidth, initHeight, "Cannon Test", NULL, NULL);
+		gWindow = glfwCreateWindow(initWidth, initHeight, "Project 3", NULL, NULL);
 		if (gWindow == NULL)
 		{
 			glfwTerminate();
@@ -177,19 +174,6 @@ namespace nGraphics
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		// Use this to disable VSync (swap as fast as possible!)
-		// comment out for VSync
-		//glfwSwapInterval(0);
-
-		// load the shader
-		/*gShader = new cSimpleShader();
-		if (!gShader->Load())
-		{
-			std::cout << "Shader failed to load" << std::endl;
-			delete gShader;
-			gShader = 0;
-			return false;
-		}*/
 		// load the awesome new lit shader
 		gLitShader = new cLitShader();
 		if (!gLitShader->Load())

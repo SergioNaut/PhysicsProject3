@@ -1,5 +1,10 @@
 #include <physics/cParticle.h>
 
+float getRandom(float low, float high)
+{
+	return low + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / (high - low));
+}
+
 namespace nPhysics
 {
 	cParticle::cParticle(float mass, const glm::vec3& position)
@@ -10,11 +15,17 @@ namespace nPhysics
 		, mAppliedForce(0.f)
 		, mIsAlive(true)
 	{
-		SetMass(mass);
+		sphereRadius = getRandom(0.1f, 5.0f);
+		SetMass(mass + sphereRadius);
 	}
 	cParticle::~cParticle()
 	{
 
+	}
+
+	float cParticle::GetRadius()
+	{
+		return sphereRadius;
 	}
 
 	//Added to setup mass after particle has been created

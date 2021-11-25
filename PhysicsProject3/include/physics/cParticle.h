@@ -23,8 +23,13 @@ namespace nPhysics
 		//Use mIsAlive?
 		bool mIsAlive;
 
+		float sphereRadius;
+
 		//TODO: SetSphereRadius for particles
 	public:
+
+		float GetRadius();
+
 		cParticle(float mass, const glm::vec3& position);
 		virtual ~cParticle();
 

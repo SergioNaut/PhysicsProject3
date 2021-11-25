@@ -23,13 +23,14 @@ namespace nPhysics
 			//Only relevant to the cGround...generator
 			//float y = (*p)->GetPosition().y;
 			glm::vec3 particlePosition = (*p)->GetPosition();
+			float newSphereRadius = (*p)->GetRadius();
 			
 			//distance = glm::dot(particlePosition,mNormal);
 			float particleDistance = glm::dot(particlePosition, glm::normalize(mNormal))-distance;
 
 			//I think that's correct
 			//if (distance <= sphereRadius)
-			if (particleDistance <= sphereRadius)
+			if (particleDistance <= newSphereRadius)
 			{
 				//I think that's correct
 				contact->mContactNormal = mNormal;
@@ -37,7 +38,7 @@ namespace nPhysics
 				contact->mParticle1 = nullptr;
 				//I think that's correct
 				//contact->mPenetration = sphereRadius - distance /*particleDistance*/;
-				contact->mPenetration = sphereRadius - particleDistance;
+				contact->mPenetration = newSphereRadius - particleDistance;
 				//Generic restitution for now
 				contact->mRestitution = 0.7f;
 				contact++;

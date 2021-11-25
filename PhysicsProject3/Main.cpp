@@ -44,10 +44,10 @@ nGraphics::cGraphicsComponent* wallGraphics2;
 nGraphics::cGraphicsComponent* wallGraphics3;
 nGraphics::cGraphicsComponent* wallGraphics4;
 #pragma endregion
-//nGraphics::cGraphicsComponent* cannonGraphics;
 
 //Helper function
-float getRandom(float low, float high);
+//Was being used for setting a random velocity for the particles
+//float getRandom(float low, float high);
 
 int main()
 {
@@ -101,13 +101,6 @@ int main()
 		loadingInfo.Extents = glm::vec3(2.f, 2.f, 2.f);  // cube 2x2x2
 		loadingInfo.SubMeshes[0].Name = "box";
 		infos.push_back(loadingInfo);
-
-		////Cannon
-		//loadingInfo.File = "../Assets/Cannon.obj";
-		//loadingInfo.DoResize = true;
-		//loadingInfo.Extents = glm::vec3(0.1f, 0.1f, 0.1f);
-		//loadingInfo.SubMeshes[0].Name = "cannon";
-		//infos.push_back(loadingInfo);
 
 		if (!nGraphics::gMeshManager->Load(infos))
 		{
@@ -182,16 +175,6 @@ int main()
 		wallGraphics4 = new nGraphics::cGraphicsComponent(graphicsDef);
 	}
 
-	//Cannon
-	/*nGraphics::sGraphicsComponentDef graphicsDef;
-	graphicsDef.Mesh = "cannon";
-	graphicsDef.TexDiffuse = "white";
-	glm::set(graphicsDef.ModelColor, 0.0f, 0.0f, 0.0f, 1.0f);
-	glm::set(graphicsDef.Position, 0.5f, 0.0f, 0.5f);
-	glm::set(graphicsDef.Rotation, -1.57f, 0.f, 0.f);
-	glm::set(graphicsDef.Scale, 20.f, 20.1f, 20.1f);
-	cannonGraphics = new nGraphics::cGraphicsComponent(graphicsDef);*/
-
 	// Enter the main loop
 	mainLoop();
 
@@ -203,7 +186,7 @@ int main()
 	delete wallGraphics2;
 	delete wallGraphics3;
 	delete wallGraphics4;
-	//delete cannonGraphics;
+
 	delete camera;
 
 	nGraphics::Shutdown();
@@ -279,7 +262,7 @@ void mainLoop()
 	nPhysics::cPlaneParticleContactGenerator particleContactGeneratorBack(glm::vec3(0.0f, 0.f, -2.0f), -10.0f, 1.0f);
 	world->AddContactContactGenerator(&particleContactGeneratorBack);
 
-	////Roof
+	//Roof
 	//nPhysics::cPlaneParticleContactGenerator particleContactGeneratorRoof(glm::vec3(1.0f, 5.f, 0.0f), -5.0f, 1.0f);
 	//world->AddContactContactGenerator(&particleContactGeneratorRoof);
 
@@ -321,11 +304,10 @@ void mainLoop()
 
 		if (key1->IsJustPressed())
 		{
-			//TODO: Cannon stuff
 			glm::mat3 rotMat = rotationMatrix(cannonYaw, cannonPitch);
 			nPhysics::cParticle* particleP = new nPhysics::cParticle(1.0f, glm::vec3(0.f, 1.5f, 0.f));
 			particleP->SetAcceleration(glm::vec3(0.0f, -9.8f, 0.0f));
-			//TODO: Change velocity with rotMat
+			//Change velocity with rotMat
 			//glm::vec3 randomVelocity(getRandom(-3.0f, 3.0f), 10.0f, getRandom(-3.0f, 3.0f));
 			glm::vec3 randomVelocity((rotMat[0] * 3.0f) + (rotMat[1] * 10.0f) + (rotMat[2] * 3.0f));
 			particleP->SetVelocity(randomVelocity);
@@ -393,7 +375,7 @@ void mainLoop()
 		// update the camera
 		camera->Update(deltaTime);
 
-		// done with all the updates involving input, so clear it out
+		// Clear inputs
 		nInput::gInputManager->ClearState();
 
 		// begin setting per-frame vars
@@ -404,7 +386,7 @@ void mainLoop()
 
 		nGraphics::BeginFrame(PerFrameVars);
 
-		// begin per-item rendering
+		// Graphical Item rendering
 		skyboxGraphics->Render();
 		planeGraphics->Render();
 		wallGraphics1->Render();
@@ -412,7 +394,8 @@ void mainLoop()
 		wallGraphics3->Render();
 		wallGraphics4->Render();
 
-		// render the projectiles
+		// render the particles
+		//Using the projectileMatrix from midterms
 		for (nPhysics::cParticle* p : particles)
 		{
 			glm::mat4 projectileMatrix(1.0f);
@@ -423,28 +406,10 @@ void mainLoop()
 			rockGraphics->GetVars()->ModelColor = particleColor;
 			rockGraphics->Render();
 		}
-		// end per-item rendering
+		// end Graphical Item rendering
 
 		nGraphics::EndFrame();
-
-
-		// clean up any dead particles
-		/*for (std::vector<nPhysics::cParticle*>::iterator it = particles.begin(); it != particles.end(); )
-		{
-			if ((*it)->GetIsAlive())
-			{
-				it++;
-			}
-			else
-			{
-				std::vector<nPhysics::cParticle*>::iterator removeIt = it;
-				nPhysics::cParticle* deadParticle = *it;
-				it = particles.erase(removeIt);
-				world->RemoveParticle(deadParticle);
-				delete deadParticle;
-			}
-		}*/
-
+		//No need to delete the particles
 
 		// Exit conditions: press escape or close the window by the 'x' button
 		if (!(nInput::IsKeyUp::Escape() && !nGraphics::WindowShouldClose()))
@@ -462,11 +427,11 @@ void mainLoop()
 	delete world;
 }
 
-#pragma region Helpers
-
-float getRandom(float low, float high)
-{
-	return low + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / (high - low));
-}
-
-#pragma endregion
+//#pragma region Helpers
+//
+//float getRandom(float low, float high)
+//{
+//	return low + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / (high - low));
+//}
+//
+//#pragma endregion
