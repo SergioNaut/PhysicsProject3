@@ -1,7 +1,5 @@
 #include <graphics/cMeshManager.h>
 #include <graphics/load/LoadSingleMeshFromFile.h>
-
-// std
 #include <iostream>
 
 

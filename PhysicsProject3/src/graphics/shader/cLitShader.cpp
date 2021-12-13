@@ -1,7 +1,5 @@
 #include <graphics/shader/cLitShader.h>
 #include <graphics/shader/LoadShader.h>
-
-// std
 #include <iostream>
 
 namespace nGraphics
@@ -74,14 +72,14 @@ namespace nGraphics
 
 	bool cLitShader::Load()
 	{
-		if (IsLoaded()) return true; // all good
+		if (IsLoaded()) return true;
 		mProgramId = LoadShader("../Assets/shaders/LitShader.vert", "../Assets/shaders/LitShader.frag");
 		if (mProgramId == 0)
 		{
 			std::cout << "shader couldn't load" << std::endl;
 			return false;
 		}
-		// per frame
+		// per frame 
 		mUniformId_ViewMatrix = glGetUniformLocation(mProgramId, "ViewMatrix");
 		mUniformId_ProjectionMatrix = glGetUniformLocation(mProgramId, "ProjectionMatrix");
 		mUniformId_EyePosition = glGetUniformLocation(mProgramId, "eyePosition");

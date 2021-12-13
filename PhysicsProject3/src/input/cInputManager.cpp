@@ -1,8 +1,8 @@
 #include <input/cInputManager.h>
 #include <graphics/graphics.h> 
-// std
 #include <iostream>
 
+//Setup for inputs
 namespace nInput
 {
 	cInputManager* cInputManager::mInstance = 0;
@@ -64,7 +64,7 @@ namespace nInput
 	{
 		if (!mInstance)
 		{
-			std::cout << "key callback is registered without an input manager instance!" << std::endl;
+			std::cout << "Error on KeyCallback: No inputManager Instance exists." << std::endl;
 			return;
 		}
 		cKey* key = mInstance->GetKey(keyId);
@@ -84,7 +84,7 @@ namespace nInput
 	{
 		if (!mInstance)
 		{
-			std::cout << "key callback is registered without an input manager instance!" << std::endl;
+			std::cout << "Error on MouseKeyCallback: No inputManager Instance exists." << std::endl;
 			return;
 		}
 		cKey* key = mInstance->GetKey(button);
@@ -104,7 +104,7 @@ namespace nInput
 	{
 		if (!mInstance)
 		{
-			std::cout << "key callback is registered without an input manager instance!" << std::endl;
+			std::cout << "Error on MousePositionCallback: No inputManager Instance exists." << std::endl;
 			return;
 		}
 		mInstance->mCursorX = x;
@@ -115,7 +115,7 @@ namespace nInput
 	{
 		if (!mInstance)
 		{
-			std::cout << "scroll callback is registered without an input manager instance!" << std::endl;
+			std::cout << "Error on ScrollCallback: No inputManager Instance exists." << std::endl;
 			return;
 		}
 		mInstance->mScrollX = x;

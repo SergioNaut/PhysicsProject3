@@ -1,7 +1,5 @@
 #include <graphics/shader/cSimpleShader.h>
 #include <graphics/shader/LoadShader.h>
-
-// std
 #include <iostream>
 
 namespace nGraphics
@@ -12,7 +10,6 @@ namespace nGraphics
 		, mUniformId_ModelColor(0), mUniformId_EyePosition(0)
 		, mUniformId_TexFactors(0), mUniformId_TexDiffuse(0)
 	{
-
 	}
 
 	cSimpleShader::~cSimpleShader()
@@ -22,7 +19,7 @@ namespace nGraphics
 
 	bool cSimpleShader::Load()
 	{
-		if (IsLoaded()) return true; // all good
+		if (IsLoaded()) return true;
 		mProgramId = LoadShader("../Assets/shaders/SimpleShader.vert", "../Assets/shaders/SimpleShader.frag");
 		if (mProgramId == 0)
 		{
@@ -64,18 +61,6 @@ namespace nGraphics
 		//SetUniform_IsCubeMap(false);
 		SetUniform_IsCubeMap(perEntityVars.IsCubeMap);
 		SetUniform_CubeMap(perEntityVars.CubeMap);
-		/*
-		if (perEntityVars.IsCubeMap)
-		{
-			glDisable(GL_DEPTH);
-			glDepthMask(GL_FALSE);
-		}
-		else
-		{
-			glDepthMask(GL_TRUE);
-			glEnable(GL_DEPTH);
-		}
-		*/
 	}
 
 	void cSimpleShader::Bind()

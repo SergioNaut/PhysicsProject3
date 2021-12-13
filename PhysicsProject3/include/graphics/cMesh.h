@@ -1,8 +1,6 @@
 #pragma once
 
 #include <graphics/shader/shader_vars.h>
-
-// std
 #include <string>
 
 namespace nGraphics
@@ -11,10 +9,8 @@ namespace nGraphics
 	class cMesh
 	{
 	public:
-		//sPerEntityVars Vars;
-		// getters
-		// the values are meant to stay constant
-		// so no touchy-touchy after the initial setup is done
+		// Getters
+		// Values shouldn't be changed after setup
 		inline int GetNumIndices()	const { return mNumIndices; }
 		inline int GetBaseIndex()	const { return mBaseIndex; }
 		inline int GetBaseVertex()	const { return mBaseVertex; }
@@ -23,7 +19,7 @@ namespace nGraphics
 		bool Render();
 	private:
 		friend class cMeshManager;
-		// cMeshManager is entirely responsible for the life-cycle
+		// Responsible for the life-cycle
 		cMesh(cMeshManager* manager, const std::string& name, int numIndices, int baseIndex, int baseVertex);
 		~cMesh();
 

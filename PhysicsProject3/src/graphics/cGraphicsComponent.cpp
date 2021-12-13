@@ -22,11 +22,7 @@ namespace nGraphics
 		mVars.ModelMatrix = glm::translate(mVars.ModelMatrix, def.Position);
 		mVars.ModelMatrix = glm::scale(mVars.ModelMatrix, def.Scale);
 	}
-	cGraphicsComponent::cGraphicsComponent()
-		: mMesh(0)
-	{
-
-	}
+	cGraphicsComponent::cGraphicsComponent(): mMesh(0){}
 
 	cGraphicsComponent::~cGraphicsComponent()
 	{

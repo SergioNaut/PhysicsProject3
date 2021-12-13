@@ -141,6 +141,7 @@ namespace nPhysics
 		ClearAppliedForces();
 	}
 
+	//IsAlive Helpers
 	void cParticle::SetIsAlive(bool isAlive)
 	{
 		mIsAlive = isAlive;

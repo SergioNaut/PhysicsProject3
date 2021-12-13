@@ -7,17 +7,17 @@ namespace nInput
 {
 	namespace KeyCode
 	{	
-		const int KEY_SPACE = GLFW_KEY_SPACE;
+		/*const int KEY_SPACE = GLFW_KEY_SPACE;*/
 		const int KEY_1 = GLFW_KEY_1;
-		const int KEY_2 = GLFW_KEY_2;
+		/*const int KEY_2 = GLFW_KEY_2;
 		const int KEY_3 = GLFW_KEY_3;
-		const int KEY_4 = GLFW_KEY_4;
+		const int KEY_4 = GLFW_KEY_4;*/
 		const int KEY_W = GLFW_KEY_W;
 		const int KEY_A = GLFW_KEY_A;
 		const int KEY_S = GLFW_KEY_S;
 		const int KEY_D = GLFW_KEY_D;
-		const int KEY_DOWN = GLFW_KEY_DOWN;
-		const int KEY_UP = GLFW_KEY_UP;
+	/*	const int KEY_DOWN = GLFW_KEY_DOWN;*/
+	/*	const int KEY_UP = GLFW_KEY_UP;*/
 	}
 
 	namespace IsKeyDown
@@ -25,8 +25,8 @@ namespace nInput
 		inline bool __InternalIsKeyDown(int key) { return glfwGetKey(nGraphics::gWindow, key) == GLFW_PRESS; }
 		// Escape & Camera
 		inline bool Escape() { return __InternalIsKeyDown(GLFW_KEY_ESCAPE); }
-		inline bool Up() { return __InternalIsKeyDown(GLFW_KEY_UP); }
-		inline bool Down() { return __InternalIsKeyDown(GLFW_KEY_DOWN); }
+		/*inline bool Up() { return __InternalIsKeyDown(GLFW_KEY_UP); }
+		inline bool Down() { return __InternalIsKeyDown(GLFW_KEY_DOWN); }*/
 		// For cannon control
 		inline bool W() { return __InternalIsKeyDown(GLFW_KEY_W); }
 		inline bool A() { return __InternalIsKeyDown(GLFW_KEY_A); }
@@ -34,9 +34,9 @@ namespace nInput
 		inline bool D() { return __InternalIsKeyDown(GLFW_KEY_D); }
 		// For choosing projectiles
 		inline bool Num1() { return __InternalIsKeyDown(GLFW_KEY_1); }
-		inline bool Num2() { return __InternalIsKeyDown(GLFW_KEY_2); }
+		/*inline bool Num2() { return __InternalIsKeyDown(GLFW_KEY_2); }
 		inline bool Num3() { return __InternalIsKeyDown(GLFW_KEY_3); }
-		inline bool Num4() { return __InternalIsKeyDown(GLFW_KEY_4); }
+		inline bool Num4() { return __InternalIsKeyDown(GLFW_KEY_4); }*/
 	}
 	namespace IsKeyUp
 	{

@@ -7,17 +7,17 @@ namespace nPhysics
 	class cParticle
 	{
 	private:
-		// Linear position of the particle in world space
+		// Position of the particle in the world
 		glm::vec3 mPosition;
-		// Linear velocity of the particle in world space
+		// Velocities of the particle in the world
 		glm::vec3 mVelocity;
-		// Linear acceleration of the particle in world space
+		// Acceleration of the particle in the world
 		glm::vec3 mAcceleration;
 		// Inverse mass
 		float mInverseMass;
 		// Externally applied forces accumulated during a time step
 		glm::vec3 mAppliedForce;
-		//TO DO: Use Damping?
+		
 		float mDamping;
 
 		//Use mIsAlive?

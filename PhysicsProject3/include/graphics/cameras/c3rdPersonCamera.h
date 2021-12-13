@@ -8,24 +8,19 @@ namespace nGraphics
 	struct s3rdPersonCameraDef
 	{
 		s3rdPersonCameraDef();
-		// This is the initial offset of the eye from the target
-		// This will be normalized during setup, use Distance for distance
+		// This is the initial offset of the Camera from the target
+		//Normalized during setup
 		glm::vec3	Offset;
-		// How fast you wanna zoom?
+
 		float		ZoomSpeed;
 		// Initial distance of the eye from the target
 		float		Distance;
 		// Zoom boundary values
 		float		MaxDistance;
 		float		MinDistance;
-		// Initial left/right pan position. In radians.
-		float		Yaw;
-		// Yaw boundary values
-		float		MinYaw;
-		float		MaxYaw;
-		// How fast you wanna yaw?  In radians/sec
-		float		YawSpeed;
-		// Initial up/down tilt position. In radians.
+
+#pragma region PitchStuff
+		//Pitch = Up/Down
 		float		Pitch;
 		float		MinPitch;
 		float		MaxPitch;
@@ -34,6 +29,15 @@ namespace nGraphics
 		bool		ClampYaw;
 		bool		ClampPitch;
 		bool		InvertPitch;
+#pragma endregion
+
+#pragma region YawStuff
+		//Yaw = Left/Right
+		float		Yaw;
+		float		MinYaw;
+		float		MaxYaw;
+		float		YawSpeed;
+#pragma endregion
 	};
 
 	class c3rdPersonCamera : public nGraphics::iCamera

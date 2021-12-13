@@ -61,15 +61,14 @@ namespace nGraphics
 		cLitShader();
 		virtual ~cLitShader();
 
-		// load it up!
 		bool Load();
 		void Bind();
 
-		// successfully loaded, good to use
+		// Loaded Correctly
 		inline bool IsLoaded() const { return mProgramId != 0; }
 		inline GLuint GetProgramId() const { return mProgramId; }
 
-		// per-frame
+		// per-frame functions
 		inline void SetUniform_ViewMatrix(const float* m) { glUniformMatrix4fv(mUniformId_ViewMatrix, 1, GL_FALSE, m); }
 		inline void SetUniform_ProjectionMatrix(const float* m) { glUniformMatrix4fv(mUniformId_ProjectionMatrix, 1, GL_FALSE, m); }
 		inline void SetUniform_EyePosition(const float* v) { glUniform3fv(mUniformId_EyePosition, 1, v); }
@@ -108,7 +107,6 @@ namespace nGraphics
 			glUniform3fv(uniforms.Specular, 1, glm::value_ptr(pointLight.Specular));
 		}
 
-		// per-entity
 		inline void SetUniform_ModelMatrix(const float* m) { glUniformMatrix4fv(mUniformId_ModelMatrix, 1, GL_FALSE, m); }
 		
 		inline void SetUniform_Material(const sMaterial& material)
@@ -125,7 +123,6 @@ namespace nGraphics
 			glBindTexture(GL_TEXTURE_2D, material.TexSpecular ? material.TexSpecular->GetId() : -1);
 		}
 
-		// per-entity
 		inline void SetUniform_IsCubeMap(int b) { glUniform1i(mUniformId_IsCubeMap, b); }
 		inline void SetUniform_CubeMap(cTexture* tex)
 		{

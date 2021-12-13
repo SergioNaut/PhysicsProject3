@@ -4,23 +4,23 @@
 
 namespace nInput
 {
-	// singleton
 	class cInputManager
 	{
 	public:
 
 		static cInputManager* GetInstance();
 		~cInputManager();
+		//Used for the Camera Movement
 		inline double GetCursorX() { return mCursorX; }
 		inline double GetCursorY() { return mCursorY; }
 		inline double GetScrollX() { return mScrollX; }
 		inline double GetScrollY() { return mScrollY; }
 
 		cKey* GetKey(int keyId);
-		// 
+		
 		cKey* ListenToKey(int keyId);
-		// call this after everything has had a chance to react to input states
-		// to deal with all the JUST-pressed and JUST-released stuff
+		
+		//Called after every input to deal with Just Pressed/ Just Released inputs
 		void ClearState();
 
 	private:
@@ -40,7 +40,6 @@ namespace nInput
 		static void ScrollCallback(GLFWwindow* window, double x, double y);
 
 		cInputManager();
-		cInputManager(const cInputManager& tm) {}
 		cInputManager& operator=(const cInputManager& tm) { return *this; }
 	};
 }

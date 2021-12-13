@@ -145,12 +145,9 @@ namespace nGraphics
 	private:
 		int mVertexByteSize;
 	};
-	/*
-		cBuffer
-		really just a container for a few different buffer-related helper classes
-		and a container for mesh entries for reference
-		load, bind, disable, render functionality
-	*/
+	
+	//	cBuffer contains various buffer helper functions 
+		
 	class cBuffer
 	{
 	public:

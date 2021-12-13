@@ -5,22 +5,23 @@ namespace nInput
 	cKey::cKey(int id)
 		: mKeyId(id), mDown(false), mJust(false)
 	{
-		mTimeStamp = glfwGetTime();
+
 	}
 
 	cKey::~cKey() { }
 
 	void cKey::Press()
 	{
+		//Is the key Up?
 		if (!mDown)
 		{
 			mDown = true;
 			mJust = true;
-			mTimeStamp = glfwGetTime();
+
 		}
 		else
 		{
-			// already down
+			// Key is already down
 			mJust = false;
 		}
 	}
@@ -31,7 +32,7 @@ namespace nInput
 		{
 			mDown = false;
 			mJust = true;
-			mTimeStamp = glfwGetTime();
+
 		}
 		else
 		{

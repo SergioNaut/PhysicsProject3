@@ -128,7 +128,7 @@ namespace nGraphics
 			mPitch = glm::clamp(mPitch, mMinPitch, mMaxPitch);
 		}
 		// UP and DOWN keys for zooming IN and OUT
-		bool pressUp = nInput::IsKeyDown::Up();
+		/*bool pressUp = nInput::IsKeyDown::Up();
 		bool pressDown = nInput::IsKeyDown::Down();
 		if (pressDown != pressUp)
 		{
@@ -137,7 +137,7 @@ namespace nGraphics
 			mDistance += zoomSpeed * dt;
 			if (mDistance < mMinDistance) mDistance = mMinDistance;
 			if (mDistance > mMaxDistance) mDistance = mMaxDistance;
-		}
+		}*/
 	}
 
 	void cCamera::UpdateView()

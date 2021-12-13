@@ -147,6 +147,7 @@ copy /Y "$(SolutionDir)Extern\FreeImage\lib\x64\Debug\FreeImaged.dll" "$(OutDir)
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="particle_constraints.cpp" />
     <ClCompile Include="src\graphics\cameras\c3rdPersonCamera.cpp" />
     <ClCompile Include="src\graphics\cBuffer.cpp" />
     <ClCompile Include="src\graphics\cCamera.cpp" />
@@ -215,6 +216,7 @@ copy /Y "$(SolutionDir)Extern\FreeImage\lib\x64\Debug\FreeImaged.dll" "$(OutDir)
     <ClInclude Include="include\physics\iParticleForceGenerator.h" />
     <ClInclude Include="include\physics\particle_contact_generators.h" />
     <ClInclude Include="include\physics\particle_force_generators.h" />
+    <ClInclude Include="particle_constraints.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
