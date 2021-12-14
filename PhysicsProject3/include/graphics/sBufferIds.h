@@ -3,10 +3,8 @@
 
 namespace nGraphics
 {
-	/*
-		helper struct to contain buffer ids
-		Used only for the graphics engine
-	*/
+	// helper struct to contain buffer ids
+	// Used only for the graphics engine
 	struct sBufferIds
 	{
 		sBufferIds() : VertexId(0), IndexId(0), BufferIds(0), NumBufferIds(0) {}

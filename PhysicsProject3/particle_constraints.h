@@ -3,9 +3,7 @@
 //TODO: Add Rope constraint
 namespace nPhysics
 {
-	/// <summary>
-	/// cParticleConstraint is the base class for any constraint between two particles
-	/// </summary>
+	//Base Class for any constraint between 2 particles
 	class cParticleConstraint : public iParticleContactGenerator
 	{
 	protected:
@@ -25,7 +23,7 @@ namespace nPhysics
 		cParticle* GetParticleA();
 		cParticle* GetParticleB();
 
-		// AddContact will be overridden by inheriting classes
+		// AddContact will be overridden by the inheriting classes
 		//virtual size_t AddContact(cParticleContact* contact, size_t limit, std::vector<cParticle*>& particles) const = 0;
 	};
 

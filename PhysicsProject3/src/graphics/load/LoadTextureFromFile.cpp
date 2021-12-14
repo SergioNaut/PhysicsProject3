@@ -48,7 +48,8 @@ namespace nGraphics
 				GL_UNSIGNED_BYTE,	// Pixel data type  
 				textureData);
 		}
-							  // Specify our minification and magnification filters
+		// Specify our minification and magnification filters
+		// Looks like a typo, I guess it's not
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minificationFilter);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magnificationFilter);
 		// If we're using MipMaps, then we'll generate them here.

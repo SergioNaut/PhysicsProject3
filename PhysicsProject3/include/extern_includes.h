@@ -13,17 +13,15 @@
 #include <glm/james/mat4stack.h>
 #include <glm/james/inline_helpers.h>
 #include <glm/james/aabb.h>
-//#include <glm/james/rotation_from_to.h>
 
-// include glew first
+// Include glew first
 #define GLEW_STATIC
 #include <GL\glew.h>
-// include glfw
+// Include glfw
 #include <GLFW\glfw3.h>
 
 // FreeImage
 #ifndef FREEIMAGE_LIB
 #define FREEIMAGE_LIB
 #endif // !FREEIMAGE_LIB
-
 #include <FreeImage.h>

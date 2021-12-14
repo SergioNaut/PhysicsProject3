@@ -126,7 +126,6 @@ namespace nGraphics
 		inline void SetUniform_IsCubeMap(int b) { glUniform1i(mUniformId_IsCubeMap, b); }
 		inline void SetUniform_CubeMap(cTexture* tex)
 		{
-			//glActiveTexture(80 + GL_TEXTURE0);
 			glActiveTexture(GL_TEXTURE2);
 			glBindTexture(GL_TEXTURE_2D, tex ? tex->GetId() : -1);
 			glUniform1i(mUniformId_CubeMap, 2);

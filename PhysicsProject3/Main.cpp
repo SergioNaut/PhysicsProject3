@@ -70,47 +70,50 @@ int main()
 		return -1;
 	}
 
-	{
-		// Loading textures to use with our meshes
+#pragma region Textures
+	// Loading textures to use with our meshes
 		//nGraphics::gTextureManager->Load("../Assets/skybox/tidepool", "skybox", true);
-		nGraphics::gTextureManager->Load("../Assets/WhiteSquare.bmp", "whiteSquare", false);
-		nGraphics::gTextureManager->Load("../Assets/stone_wall.bmp", "stone", false);
-		nGraphics::gTextureManager->Load("../Assets/grafitti.bmp", "grafitti", false);
-		nGraphics::gTextureManager->Load("../Assets/white.bmp", "white", false);
-		nGraphics::gTextureManager->Load("../Assets/brickwall.bmp", "bricks", false);
-		nGraphics::gTextureManager->Load("../Assets/manyMtGFaces.bmp", "green", false);
-		nGraphics::gTextureManager->Load("../Assets/roald.bmp", "roald", false);
-	}
+	nGraphics::gTextureManager->Load("../Assets/WhiteSquare.bmp", "whiteSquare", false);
+	nGraphics::gTextureManager->Load("../Assets/stone_wall.bmp", "stone", false);
+	nGraphics::gTextureManager->Load("../Assets/grafitti.bmp", "grafitti", false);
+	nGraphics::gTextureManager->Load("../Assets/white.bmp", "white", false);
+	nGraphics::gTextureManager->Load("../Assets/brickwall.bmp", "bricks", false);
+	//nGraphics::gTextureManager->Load("../Assets/manyMtGFaces.bmp", "green", false);
+	nGraphics::gTextureManager->Load("../Assets/roald.bmp", "roald", false);
+#pragma endregion
 
+#pragma region LoadingMeshes
+
+	// Loading meshes
+	std::vector<nGraphics::sMeshLoadingInfo> infos;
+	nGraphics::sMeshLoadingInfo loadingInfo;
+
+	// Skybox sphere mesh
+	loadingInfo.File = "../Assets/Isoshphere_xyz_InvertedNormals.ply";
+	loadingInfo.DoResize = false;
+	loadingInfo.AddSubMesh("skybox");
+	infos.push_back(loadingInfo);
+	// Lower poly Reck mesh for Projectiles
+	loadingInfo.File = "../Assets/rock.obj";
+	loadingInfo.DoResize = true;
+	loadingInfo.Extents = glm::vec3(1.f, 1.f, 1.f);
+	loadingInfo.SubMeshes[0].Name = "rock";
+	infos.push_back(loadingInfo);
+	// Box mesh for planes and boxes
+	loadingInfo.File = "../Assets/box.obj";
+	loadingInfo.DoResize = true;
+	loadingInfo.Extents = glm::vec3(2.f, 2.f, 2.f);  // cube 2x2x2
+	loadingInfo.SubMeshes[0].Name = "box";
+	infos.push_back(loadingInfo);
+
+	if (!nGraphics::gMeshManager->Load(infos))
 	{
-		// Loading meshes
-		std::vector<nGraphics::sMeshLoadingInfo> infos;
-		nGraphics::sMeshLoadingInfo loadingInfo;
-
-		// Skybox sphere mesh
-		loadingInfo.File = "../Assets/Isoshphere_xyz_InvertedNormals.ply";
-		loadingInfo.DoResize = false;
-		loadingInfo.AddSubMesh("skybox");
-		infos.push_back(loadingInfo);
-		// Lower poly Reck mesh for Projectiles
-		loadingInfo.File = "../Assets/rock.obj";
-		loadingInfo.DoResize = true;
-		loadingInfo.Extents = glm::vec3(1.f, 1.f, 1.f); // diameter 2 spheref
-		loadingInfo.SubMeshes[0].Name = "rock";
-		infos.push_back(loadingInfo);
-		// Box mesh for planes and boxes
-		loadingInfo.File = "../Assets/box.obj";
-		loadingInfo.DoResize = true;
-		loadingInfo.Extents = glm::vec3(2.f, 2.f, 2.f);  // cube 2x2x2
-		loadingInfo.SubMeshes[0].Name = "box";
-		infos.push_back(loadingInfo);
-
-		if (!nGraphics::gMeshManager->Load(infos))
-		{
-			std::cout << "Error loading meshes" << std::endl;
-			return -1;
-		}
+		std::cout << "Error loading meshes" << std::endl;
+		return -1;
 	}
+
+#pragma endregion
+
 
 	// Create the graphics components
 	{
@@ -143,9 +146,10 @@ int main()
 		graphicsDef.Mesh = "box";
 		graphicsDef.TexDiffuse = "bricks";
 		glm::set(graphicsDef.ModelColor, 1.0f, 1.0f, 1.0f, 1.0f);
-		//glm::set(graphicsDef.Position, 10.0f, 1.0f, -10.0f);
-		glm::set(graphicsDef.Position, 40.0f, 1.0f, -40.0f);
-		glm::set(graphicsDef.Scale, 80.0f, 8.0f, 1.0f);
+		glm::set(graphicsDef.Position, 10.0f, 1.0f, -10.0f);
+		//glm::set(graphicsDef.Position, 40.0f, 1.0f, -40.0f);
+		//glm::set(graphicsDef.Scale, 80.0f, 8.0f, 1.0f);
+		glm::set(graphicsDef.Scale, 20.0f, 8.0f, 0.1f);
 		wallGraphics1 = new nGraphics::cGraphicsComponent(graphicsDef);
 	}
 	{
@@ -154,9 +158,10 @@ int main()
 		graphicsDef.Mesh = "box";
 		graphicsDef.TexDiffuse = "bricks";
 		glm::set(graphicsDef.ModelColor, 1.0f, 1.0f, 1.0f, 1.0f);
-		//glm::set(graphicsDef.Position, -10.0f, 1.0f, 10.0f);
-		glm::set(graphicsDef.Position, -35.0f, 1.0f, 40.0f);
-		glm::set(graphicsDef.Scale, 80.0f, 8.0f, 1.0f);
+		glm::set(graphicsDef.Position, -10.0f, 1.0f, 10.0f);
+		//glm::set(graphicsDef.Position, -35.0f, 1.0f, 40.0f);
+		//glm::set(graphicsDef.Scale, 80.0f, 8.0f, 1.0f);
+		glm::set(graphicsDef.Scale, 20.0f, 8.0f, 0.1f);
 		wallGraphics2 = new nGraphics::cGraphicsComponent(graphicsDef);
 	}
 	{
@@ -165,9 +170,10 @@ int main()
 		graphicsDef.Mesh = "box";
 		graphicsDef.TexDiffuse = "bricks";
 		glm::set(graphicsDef.ModelColor, 1.0f, 1.0f, 1.0f, 1.0f);
-		//glm::set(graphicsDef.Position, -10.0f, 1.0f, 10.0f);
-		glm::set(graphicsDef.Position, -40.0f, 1.0f, 40.0f);
-		glm::set(graphicsDef.Scale, 1.0f, 8.0f, 80.0f);
+		glm::set(graphicsDef.Position, -10.0f, 1.0f, 10.0f);
+		//glm::set(graphicsDef.Position, -40.0f, 1.0f, 40.0f);
+		//glm::set(graphicsDef.Scale, 1.0f, 8.0f, 80.0f);
+		glm::set(graphicsDef.Scale, 0.1f, 8.0f, 20.0f);
 		wallGraphics3 = new nGraphics::cGraphicsComponent(graphicsDef);
 	}
 	{
@@ -176,9 +182,10 @@ int main()
 		graphicsDef.Mesh = "box";
 		graphicsDef.TexDiffuse = "bricks";
 		glm::set(graphicsDef.ModelColor, 1.0f, 1.0f, 1.0f, 1.0f);
-		//glm::set(graphicsDef.Position, 10.0f, 1.0f, -10.0f);
-		glm::set(graphicsDef.Position, 40.0f, 1.0f, -40.0f);
-		glm::set(graphicsDef.Scale, 1.0f, 8.0f,	80.0f);
+		glm::set(graphicsDef.Position, 10.0f, 1.0f, -10.0f);
+		//glm::set(graphicsDef.Position, 40.0f, 1.0f, -40.0f);
+		//glm::set(graphicsDef.Scale, 1.0f, 8.0f,80.0f);
+		glm::set(graphicsDef.Scale, 0.1f, 8.0f, 20.0f);
 		wallGraphics4 = new nGraphics::cGraphicsComponent(graphicsDef);
 	}
 
@@ -198,7 +205,6 @@ int main()
 
 	nGraphics::Shutdown();
 
-	// all done!
 	return 0;
 #pragma endregion
 }
@@ -252,29 +258,30 @@ void mainLoop()
 	glm::vec4 particleColor(1.0f, 1.0f, 1.0f, 1.0f);
 	float particleRadius(1.0f);
 #pragma region Planes
-	//TODO: Add all planes
+	//Planes have some values commented because I'm using this project to test things for the finals so it has some things from the finals
+	
 	//Ground Plane
-	nPhysics::cPlaneParticleContactGenerator particleContactGeneratorG(glm::vec3 (0.0f,1.f,0.0f),1.0f,1.0f);
+	nPhysics::cPlaneParticleContactGenerator particleContactGeneratorG(glm::vec3 (0.0f,/*0.2f*/ 1.0f,0.0f),1.0f,1.0f);
 	world->AddContactContactGenerator(&particleContactGeneratorG);
 
 	//Left Wall
-	nPhysics::cPlaneParticleContactGenerator particleContactGeneratorLeft(glm::vec3(1.0f, 0.f, 0.0f),/*-10.0f*/ - 40.0f, 1.0f);
+	nPhysics::cPlaneParticleContactGenerator particleContactGeneratorLeft(glm::vec3(1.0f, 0.f, 0.0f),/*-40.0f*/-10.0f, 1.0f);
 	world->AddContactContactGenerator(&particleContactGeneratorLeft);
 
 	//Right Wall
-	nPhysics::cPlaneParticleContactGenerator particleContactGeneratorRight(glm::vec3(-1.0f, 0.f, 0.0f),/*-10.0f*/ -40.0f, 1.0f);
+	nPhysics::cPlaneParticleContactGenerator particleContactGeneratorRight(glm::vec3(-1.0f, 0.f, 0.0f),/*-40.0f*/-10.0f, 1.0f);
 	world->AddContactContactGenerator(&particleContactGeneratorRight);
 
 	//Back Wall
-	nPhysics::cPlaneParticleContactGenerator particleContactGeneratorBack(glm::vec3(0.0f, 0.f, -2.0f), /*-10.0f*/-40.0f, 1.0f);
+	nPhysics::cPlaneParticleContactGenerator particleContactGeneratorBack(glm::vec3(0.0f, 0.f, -2.0f), /*-40.0f*/-10.0f, 1.0f);
 	world->AddContactContactGenerator(&particleContactGeneratorBack);
 
-	//Roof
+	//Roof - Nope
 	//nPhysics::cPlaneParticleContactGenerator particleContactGeneratorRoof(glm::vec3(1.0f, 5.f, 0.0f), -5.0f, 1.0f);
 	//world->AddContactContactGenerator(&particleContactGeneratorRoof);
 
 	//Front Wall
-	nPhysics::cPlaneParticleContactGenerator particleContactGeneratorFront(glm::vec3(0.0f, 0.f, 1.0f),/*-10.0f*/ -40.0f, 1.0f);
+	nPhysics::cPlaneParticleContactGenerator particleContactGeneratorFront(glm::vec3(0.0f, 0.f, 1.0f),/*-40.0f*/-10.0f, 1.0f);
 	world->AddContactContactGenerator(&particleContactGeneratorFront);
 #pragma endregion
 
@@ -294,6 +301,7 @@ void mainLoop()
 		previousTime = currentTime;
 
 		// FPS TITLE STUFF
+		// Kept from the class code because I like knowing the framerate since my pc lags ocasionally while testing
 		{
 			fpsTimeElapsed += deltaTime;
 			fpsFrameCount += 1.0f;

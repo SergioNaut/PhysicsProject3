@@ -4,7 +4,7 @@
 
 namespace nPhysics
 {
-	//Use this class for all different force generators
+	//Class used for all different force generators
 	class cParticleGravityGenerator : public iParticleForceGenerator
 	{
 	public:

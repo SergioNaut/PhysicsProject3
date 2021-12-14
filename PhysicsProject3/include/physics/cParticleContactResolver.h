@@ -3,15 +3,16 @@
 
 namespace nPhysics
 {
-	//The contact resolution routine for particle contacts
-	//On resolver instance is generally shared for the entire simulation
+	//Contact resolution routine for particle contacts
+	//One resolver instance is generally shared for the entire program
 
 	class cParticleContactResolver
 	{
 	public:
 		//Holds the number of interactions allowed
 		size_t mIterations;
-		//Used to keep a record of the number of iterations used for performance reasons
+		//Used to keep a record of the number of iterations
+		//Used for performance reasons
 		size_t mIterationsUsed;
 
 		//Creates a new contact resolver

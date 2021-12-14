@@ -27,13 +27,15 @@ namespace nPhysics
 		//Do not set this when creating the contact
 		glm::vec3 mMovement1;
 
-		//Resolves contact, both for velocity and interpenetration
-		void Resolve(float deltaTime);
 		//Calculates the separating velocity at this contact
 		float CalculateSeparatingVelocity() const;
+#pragma region Resolutions
+		//Resolves contact, both for velocity and interpenetration
+		void Resolve(float deltaTime);
 		//Handles impulse calculation for this collision
 		void ResolveVelocity(float deltaTime);
 		//Handles interpenetration resolution for this collision
 		void ResolvePosition(float deltaTime);
+#pragma endregion
 	};
 }

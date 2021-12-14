@@ -27,20 +27,17 @@ namespace nGraphics
 		inline GLuint GetUniform_ViewMatrix() const { return mUniformId_ViewMatrix; }
 		inline GLuint GetUniform_PojectionMatrix() const { return mUniformId_ProjectionMatrix; }
 		inline GLuint GetUniform_EyePosition() const { return mUniformId_EyePosition; }
+		inline void SetUniform_ViewMatrix(const float* m) { glUniformMatrix4fv(mUniformId_ViewMatrix, 1, GL_FALSE, m); }
+		inline void SetUniform_ProjectionMatrix(const float* m) { glUniformMatrix4fv(mUniformId_ProjectionMatrix, 1, GL_FALSE, m); }
+		inline void SetUniform_EyePosition(const float* v) { glUniform4fv(mUniformId_EyePosition, 1, v); }
 		// per-entity
 		inline GLuint GetUniform_ModelMatrix() const { return mUniformId_ModelMatrix; }
 		inline GLuint GetUniform_ModelColor() const { return mUniformId_ModelColor; }
 		inline GLuint GetUniform_TexFactors() const { return mUniformId_TexFactors; }
 		inline GLuint GetUniform_TexDiffuse() const { return mUniformId_TexDiffuse; }
-		// per-frame
-		inline void SetUniform_ViewMatrix(const float* m) { glUniformMatrix4fv(mUniformId_ViewMatrix, 1, GL_FALSE, m); }
-		inline void SetUniform_ProjectionMatrix(const float* m) { glUniformMatrix4fv(mUniformId_ProjectionMatrix, 1, GL_FALSE, m); }
-		inline void SetUniform_EyePosition(const float* v) { glUniform4fv(mUniformId_EyePosition, 1, v); }
-		// per-entity
 		inline void SetUniform_IsCubeMap(int b) { glUniform1i(mUniformId_IsCubeMap, b); }
 		inline void SetUniform_CubeMap(cTexture* tex) 
 		{
-			//glActiveTexture(80 + GL_TEXTURE0);
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_2D, tex ? tex->GetId() : -1);
 			glUniform1i(mUniformId_CubeMap, 1);

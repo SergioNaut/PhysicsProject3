@@ -5,7 +5,6 @@
 
 namespace nGraphics
 {
-	
 	struct sMeshEntry
 	{
 		sMeshEntry();

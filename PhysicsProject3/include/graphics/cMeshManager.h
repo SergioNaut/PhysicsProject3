@@ -1,8 +1,6 @@
 #pragma once
 #include <extern_includes.h>
-
 #include <graphics/load/sMeshLoadingInfo.h>
-
 #include <graphics/cBuffer.h>
 
 namespace nGraphics

@@ -6,7 +6,7 @@
 
 namespace nGraphics
 {
-	// singleton
+	// Is a singleton
 	class cTextureManager
 	{
 	public:

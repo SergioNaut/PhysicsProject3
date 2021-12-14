@@ -1,7 +1,7 @@
 #include <graphics/graphics.h>
 #include <iostream>
 
-//Leaving basic graphics stuff with only a feel changes
+//Leaving basic graphics stuff with only a few changes
 
 namespace nGraphics
 {
@@ -31,7 +31,6 @@ namespace nGraphics
 		return (float)glfwGetTime();
 	}
 
-	// clears color and depth, clears the matrix stack, then sets the per-frame uniform vars
 	void BeginFrame(sPerFrameVars& perFrameVars)
 	{
 		gMatrixStack.clear();
@@ -70,7 +69,6 @@ namespace nGraphics
 			gLitShader->SetUniform_IsCubeMap(0);
 			gLitShader->SetUniform_CubeMap(0);
 		}
-		//gShader->SetUniforms_PerEntity(vars, modelMatrix);
 		sMaterial material;
 		material.Shininess = 32.0f;
 		material.TexDiffuse = vars.TexDiffuse;
@@ -104,7 +102,9 @@ namespace nGraphics
 		glfwWindowHint(GLFW_SAMPLES, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // Needed only for Mac-OS
+		// Needed only for Mac-OS
+		//I will leave it just to be safe
+		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); 
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		
 		// Open a window and create its OpenGL context
@@ -149,7 +149,7 @@ namespace nGraphics
 		// create/initialize the texture manager
 		gTextureManager = cTextureManager::GetInstance();
 
-		// the camera
+		// Camera bits
 		if (gCamera)
 		{
 			gCamera->OnWindowResize(initWidth, initHeight);
@@ -166,7 +166,7 @@ namespace nGraphics
 
 		// Accept fragment if it closer to the camera than the former one
 		glDepthFunc(GL_LESS);
-		//glCullFace(GL_BACK);
+
 		// Cull triangles which normal is not towards the camera
 		glEnable(GL_CULL_FACE);
 
@@ -209,8 +209,8 @@ namespace nGraphics
 			gLights.Point[c].Quadratic = 0.032f;
 		}
 		// SPOT LIGHT
-		glm::set(gLights.Spot.Position, 0.f, 0.f, -3.f); // try following camera position and
-		glm::set(gLights.Spot.Direction, 0.f, 0.f, 1.f); // try following camera direction
+		glm::set(gLights.Spot.Position, 0.f, 0.f, -3.f);
+		glm::set(gLights.Spot.Direction, 0.f, 0.f, 1.f);
 
 		glm::set(gLights.Spot.Ambient, 0.0f, 0.0f, 0.0f);
 		glm::set(gLights.Spot.Diffuse, 1.0f, 1.0f, 1.0f);

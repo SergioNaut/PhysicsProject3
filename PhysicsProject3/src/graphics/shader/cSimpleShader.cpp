@@ -58,7 +58,6 @@ namespace nGraphics
 		SetUniform_ModelColor(perEntityVars.ModelColor);
 		SetUniform_TexFactors(perEntityVars.TexFactors);
 		SetUniform_TexDiffuse(perEntityVars.TexDiffuse);
-		//SetUniform_IsCubeMap(false);
 		SetUniform_IsCubeMap(perEntityVars.IsCubeMap);
 		SetUniform_CubeMap(perEntityVars.CubeMap);
 	}

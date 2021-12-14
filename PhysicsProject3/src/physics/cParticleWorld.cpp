@@ -1,7 +1,6 @@
 #include <physics/cParticleWorld.h>
 #include <algorithm>
-//Needed?
-//#include <iostream>
+
 namespace nPhysics
 {
 	cParticleWorld::cParticleWorld(size_t maxContacts, size_t iterations) : mResolver(iterations)
@@ -48,16 +47,14 @@ namespace nPhysics
 		//Deregister the particle from all force generators associated with it
 		mForceRegistry->Deregister(particle);
 
-		//Check if we have the particle.
-		//    If no: Return false to indicate that nothing was removed
-		//    If yes: Removed it. Return true to indicate that it was removed
+		//Checks if we have the particle
 		std::vector<cParticle*>::iterator itParticle = std::find(mParticles.begin(), mParticles.end(), particle);
 		if (itParticle == mParticles.end())
 		{
 			return false; // nothing was removed.
 		}
 		mParticles.erase(itParticle);
-		return true; // found it. removed it.
+		return true; // Particle was found and removed
 	}
 
 	size_t cParticleWorld::GenerateContacts()
@@ -87,6 +84,7 @@ namespace nPhysics
 
 		// 2) Integrate the particles
 		IntegrateParticles(deltaTime);
+
 		// 3) Generate contacts
 		size_t numContactsGenerated = GenerateContacts();
 
@@ -103,7 +101,7 @@ namespace nPhysics
 
 	void cParticleWorld::IntegrateParticles(float deltaTime)
 	{
-		// loop over our particles and tell them to integrate
+		// Loop over particles and tell them to integrate
 		std::vector<cParticle*>::iterator itParticle = mParticles.begin();
 		while (itParticle != mParticles.end())
 		{

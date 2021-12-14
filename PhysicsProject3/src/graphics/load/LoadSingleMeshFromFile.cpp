@@ -2,6 +2,7 @@
 #include <graphics/load/Assimp.h>
 #include <iostream>
 
+//Getting some Arithmetic Overflows in some operations but it seems to be fine
 namespace nGraphics
 {
 	sMeshEntry::sMeshEntry() : NumIndices(0), BaseIndex(0), BaseVertex(0) {}
@@ -14,6 +15,7 @@ namespace nGraphics
 	const aiScene* InternalLoadScene(Assimp::Importer& importer, const char* path)
 	{
 		unsigned int flags = 0;
+#pragma region UnusedFlags
 		//flags |= aiProcess_SortByPType;
 		//flags |= aiProcess_LimitBoneWeights;
 		//flags |= aiProcess_CalcTangentSpace;
@@ -21,10 +23,12 @@ namespace nGraphics
 		//flags |= aiProcess_GenNormals;
 		//flags |= aiProcess_GenUVCoords;
 		//flags |= aiProcess_TransformUVCoords;
-		flags |= aiProcess_GenSmoothNormals;
-		flags |= aiProcess_Triangulate;
 		//flags |= aiProcess_FindDegenerates;
 		//flags |= aiProcess_FindInvalidData;
+#pragma endregion
+		flags |= aiProcess_GenSmoothNormals;
+		flags |= aiProcess_Triangulate;
+		
 		const aiScene* scene = importer.ReadFile(path, flags);
 		if (!scene)
 		{

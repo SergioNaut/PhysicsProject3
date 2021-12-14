@@ -12,7 +12,6 @@ namespace nInput
 
 	void cKey::Press()
 	{
-		//Is the key Up?
 		if (!mDown)
 		{
 			mDown = true;
@@ -21,7 +20,6 @@ namespace nInput
 		}
 		else
 		{
-			// Key is already down
 			mJust = false;
 		}
 	}

@@ -21,9 +21,9 @@ namespace nGraphics
 		std::vector<sSubMeshLoadingInfo> SubMeshes;
 		void AddSubMesh(const std::string& name, unsigned int meshIndex = 0) { SubMeshes.push_back(sSubMeshLoadingInfo(name, meshIndex)); }
 		void AddSubMesh(const sSubMeshLoadingInfo& subMeshInfo) { SubMeshes.push_back(subMeshInfo); }
-		// for resizing
+		//Used for resizing
 		glm::vec3 Extents;
-		// any resizing to be done?
+		// Checks if any resizing needs to be done
 		bool DoResize;
 		// if you want to maintain the dimensions,
 		// we'll be using the minimum of whatever you put in Extents

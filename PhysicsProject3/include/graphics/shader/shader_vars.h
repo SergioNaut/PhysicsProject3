@@ -29,7 +29,6 @@ namespace nGraphics
 		cTexture* CubeMap;
 	};
 
-	// JAMES BEGIN
 #pragma region ProfessorsStructs
 
 	struct sMaterial
@@ -85,5 +84,4 @@ namespace nGraphics
 	};
 
 #pragma endregion
-
 }

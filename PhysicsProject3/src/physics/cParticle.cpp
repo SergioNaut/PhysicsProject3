@@ -15,13 +15,11 @@ namespace nPhysics
 		, mAppliedForce(0.f)
 		, mIsAlive(true)
 	{
-		sphereRadius = getRandom(0.1f, 5.0f);
+		//Randomizes the sphereRadius a little bit
+		sphereRadius = getRandom(0.1f, 1.0f);
 		SetMass(mass + sphereRadius);
 	}
-	cParticle::~cParticle()
-	{
-
-	}
+	cParticle::~cParticle(){}
 
 	float cParticle::GetRadius()
 	{
@@ -131,7 +129,6 @@ namespace nPhysics
 		}
 
 		mPosition += mVelocity * deltaTime;
-		// F*(1/m) = a
 		mVelocity += (mAcceleration + mAppliedForce * mInverseMass) * deltaTime;
 
 		// apply damping
@@ -141,7 +138,8 @@ namespace nPhysics
 		ClearAppliedForces();
 	}
 
-	//IsAlive Helpers
+#pragma region IsAliveHelpers
+
 	void cParticle::SetIsAlive(bool isAlive)
 	{
 		mIsAlive = isAlive;
@@ -151,4 +149,6 @@ namespace nPhysics
 	{
 		return mIsAlive;
 	}
+#pragma endregion
+
 }

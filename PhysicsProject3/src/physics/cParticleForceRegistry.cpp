@@ -10,6 +10,7 @@ namespace nPhysics
 		mRegistry.insert(std::make_pair(particle, generator));
 	}
 
+#pragma region Deregister
 	void cParticleForceRegistry::Deregister(cParticle* particle)
 	{
 		mRegistry.erase(particle);
@@ -38,7 +39,7 @@ namespace nPhysics
 			}
 		}
 	}
-
+#pragma endregion
 	void cParticleForceRegistry::UpdateForces(float deltaTime)
 	{
 		for (registryIterator it = mRegistry.begin(); it != mRegistry.end(); it++)

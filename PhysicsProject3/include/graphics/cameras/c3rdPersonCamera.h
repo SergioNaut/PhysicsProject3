@@ -72,7 +72,7 @@ namespace nGraphics
 		int mWidth;
 		int mHeight;
 		// The transform of the object we're looking at
-		glm::mat4 mTargetTranform;
+		glm::mat4 mTargetTransform;
 
 		glm::vec3 mForwardAxis; // secondary
 		glm::vec3 mRightAxis; // secondary

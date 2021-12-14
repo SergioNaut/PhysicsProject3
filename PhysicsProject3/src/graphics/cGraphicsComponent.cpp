@@ -48,7 +48,6 @@ namespace nGraphics
 			mVars.TexFactors.x = 0.f;
 			return false;
 		}
-
 	}
 
 	void cGraphicsComponent::Render()

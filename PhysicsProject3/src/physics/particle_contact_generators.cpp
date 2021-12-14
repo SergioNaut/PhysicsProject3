@@ -9,10 +9,8 @@ namespace nPhysics
 		distance = dDistance;
 		sphereRadius = sSphereRadius;
 	}
-	cPlaneParticleContactGenerator::~cPlaneParticleContactGenerator()
-	{
-
-	}
+	
+	cPlaneParticleContactGenerator::~cPlaneParticleContactGenerator(){}
 
 	size_t cPlaneParticleContactGenerator::AddContact(cParticleContact* contact, size_t limit, std::vector<cParticle*>& particles) const
 	{

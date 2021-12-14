@@ -3,6 +3,7 @@
 
 namespace nGraphics
 {
+	//Camera is basically the same, with a few changes in the values
 	s3rdPersonCameraDef::s3rdPersonCameraDef()
 	{
 		ElasticYaw = false;
@@ -11,6 +12,7 @@ namespace nGraphics
 		InvertPitch = false;
 		ZoomSpeed = 50.f;
 		MinDistance = 2.f;
+		//Distance was changed from base code
 		Distance = 30.f;
 		MaxDistance = 100.f;
 		Yaw = 0.f;
@@ -146,8 +148,7 @@ namespace nGraphics
 		}
 		else
 		{
-			// apply damping until it's close to zero
-			// velocity *= pow(1.0 - damping, timeStep);
+			// apply damping until speed is close to zero
 			mCurrentZoomSpeed *= glm::pow(0.01f, dt);
 			if (glm::abs(mCurrentZoomSpeed) < 0.005f)
 			{
@@ -168,21 +169,20 @@ namespace nGraphics
 		glm::vec3 up(0.f, 1.f, 0.f);
 		glm::vec3 right(1.f, 0.f, 0.f);
 
-		// set up the view matrix
-		// the player's position in global space
-		glm::vec3 target(mTargetTranform[3].x, mTargetTranform[3].y, mTargetTranform[3].z);
+		// set up the view matrix, that's the player's position in global space
+		glm::vec3 target(mTargetTransform[3].x, mTargetTransform[3].y, mTargetTransform[3].z);
 		// offset, relative to the player's position (w = 0.f so not to get it's translation)
 		glm::vec4 offset(mOffset.x, mOffset.y, mOffset.z, 0.f);
 		// rotate the player's transform by our yaw amount, then apply it to the offset
 		// to get a properly rotated offset, relative to the player's position
-		glm::mat4 transform(glm::rotate(mTargetTranform, mYaw, up));
+		glm::mat4 transform(glm::rotate(mTargetTransform, mYaw, up));
 		transform = glm::rotate(transform, mPitch, right);
 		offset = transform * offset;
 		// extend the offset by the distance we want (zoom)
 		offset = glm::normalize(offset) * mDistance;
 		// set the eye position to the target's position, plus our perfectly placed offset
 		glm::vec3 eye(target.x + offset.x, target.y + offset.y, target.z + offset.z);
-		// view!
+
 		mViewMatrix = glm::lookAtRH(eye, target, up);
 		// set secondary values
 		mForwardAxis = glm::normalize(target - eye);
@@ -192,6 +192,6 @@ namespace nGraphics
 
 	void c3rdPersonCamera::SetTargetTransform(glm::mat4& targetTransform)
 	{
-		mTargetTranform = targetTransform;
+		mTargetTransform = targetTransform;
 	}
 }

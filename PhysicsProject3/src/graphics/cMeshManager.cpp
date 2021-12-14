@@ -15,11 +15,7 @@ namespace nGraphics
 		return mInstance;
 	}
 
-	cMeshManager::cMeshManager() 
-	: mBuffer(0)
-	{
-
-	}
+	cMeshManager::cMeshManager() : mBuffer(0){}
 
 	cMeshManager::~cMeshManager()
 	{
@@ -31,6 +27,7 @@ namespace nGraphics
 	bool cMeshManager::Load(std::vector<sMeshLoadingInfo>& loadingInfos)
 	{
 		bool result(true);
+		//For Safety
 		Unload();
 		
 		std::vector<cVertex> vertices;
@@ -119,7 +116,8 @@ namespace nGraphics
 		{
 			return mBuffer->Disable();
 		}
-		return true;  // nothing do disable, always disabled!
+		// nothing do disable
+		return true;
 	}
 
 	bool cMeshManager::Render(cMesh* mesh)

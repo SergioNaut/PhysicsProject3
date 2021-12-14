@@ -47,7 +47,6 @@ namespace nGraphics
 		GLint Result = GL_FALSE;
 		int InfoLogLength;
 
-
 		// Compile Vertex Shader
 		std::cout << "Compiling vertex shader: " << vertex_file_path << std::endl;
 		char const * VertexSourcePointer = VertexShaderCode.c_str();
@@ -65,8 +64,6 @@ namespace nGraphics
 			return 0;
 		}
 
-
-
 		// Compile Fragment Shader
 		std::cout << "Compiling fragment shader: " << fragment_file_path << std::endl;
 		char const * FragmentSourcePointer = FragmentShaderCode.c_str();
@@ -83,8 +80,6 @@ namespace nGraphics
 			std::cout << "failed to compile fragment shader: " << &FragmentShaderErrorMessage[0] << std::endl;
 			return 0;
 		}
-
-
 
 		// Link the program
 		std::cout << "Linking program" << std::endl;

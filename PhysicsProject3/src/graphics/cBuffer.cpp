@@ -5,9 +5,9 @@ namespace nGraphics
 	cBuffer::cBuffer()
 		: mIds(0), mNumVertices(0), mNumIndices(0)
 	{
-		mDesc.push_back(cVertexAttributeDesc()); // position is default values: float[4]
-		mDesc.push_back(cVertexAttributeDesc()); // normal is default values: float[4]
-		mDesc.push_back(cVertexAttributeDesc()); // texcoords is default values: float [2]
+		mDesc.push_back(cVertexAttributeDesc());
+		mDesc.push_back(cVertexAttributeDesc());
+		mDesc.push_back(cVertexAttributeDesc());
 	}
 	cBuffer::~cBuffer()
 	{
@@ -24,22 +24,22 @@ namespace nGraphics
 		std::vector<cVertex>& vertices,
 		std::vector<cMesh*>& meshes)
 	{
-		cBuffer* buf = new cBuffer();
-		buf->mIds = new sBufferIds();
-		if (!buf->mDesc.GenerateBuffers(*buf->mIds, vertices, indices, GL_STATIC_DRAW))
+		cBuffer* buffer = new cBuffer();
+		buffer->mIds = new sBufferIds();
+		if (!buffer->mDesc.GenerateBuffers(*buffer->mIds, vertices, indices, GL_STATIC_DRAW))
 		{
-			delete buf->mIds;
-			buf->mIds = 0;
-			delete buf;
-			buf = 0;
+			delete buffer->mIds;
+			buffer->mIds = 0;
+			delete buffer;
+			buffer = 0;
 			return 0;
 		}
-		buf->mMeshes = std::vector<cMesh*>(meshes.begin(), meshes.end());
-		buf->mNumIndices = indices.size();
-		buf->mNumVertices = vertices.size();
-		return buf;
+		buffer->mMeshes = std::vector<cMesh*>(meshes.begin(), meshes.end());
+		buffer->mNumIndices = indices.size();
+		buffer->mNumVertices = vertices.size();
+		return buffer;
 	}
-
+	// Binds the buffers
 	bool cBuffer::Bind()
 	{
 		if (!IsLoaded()) return false;
@@ -55,7 +55,7 @@ namespace nGraphics
 	{
 		return Render(NumIndices(), 0, 0);
 	}
-	// render mesh id
+	// render the mesh id
 	bool cBuffer::Render(int meshIndex)
 	{
 		if (meshIndex < 0 || meshIndex >= (int)NumMeshes()) return false;

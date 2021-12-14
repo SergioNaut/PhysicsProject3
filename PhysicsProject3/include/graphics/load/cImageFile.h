@@ -22,8 +22,6 @@ namespace nGraphics
 		int GetImageWidth();
 		int GetBitsPerPixel();
 	private:
-		
-		
 		FIBITMAP* mBitmap;
 		FIBITMAP* mBitmap32;
 		int mBitsPerPixel;

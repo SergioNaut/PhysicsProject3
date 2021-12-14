@@ -5,9 +5,7 @@
 
 namespace nGraphics
 {
-	/**
-		describes in individual attribute
-	*/
+	//Describes an attribute
 	class cVertexAttributeDesc
 	{
 	public:
@@ -20,11 +18,10 @@ namespace nGraphics
 		int ByteSize;		// default 4*sizeof(float) for vec4
 		int NumVariables;	// default 4 for a vec4
 		unsigned int Type;  // default 0x1406 (GL_FLOAT) for vec4
-		bool Normalize;		// normalize the values
+		bool Normalize;		// normalize the values?
 	};
-	/**
-		helper struct to contain buffer ids
-	*/
+	
+	//helper struct to contain buffer ids
 	struct sBufferIds
 	{
 		sBufferIds() : VertexId(0), IndexId(0), BufferIds(0), NumBufferIds(0) {}
@@ -84,14 +81,11 @@ namespace nGraphics
 					glBindBuffer(GL_ARRAY_BUFFER, ids.BufferIds[idxId]);
 				}
 			}
-
 			int bytesInVertexArray = vertices.size() * mVertexByteSize;
 			glBufferData(GL_ARRAY_BUFFER, bytesInVertexArray, &vertices[0], usage);
 
 			glGenBuffers(1, &ids.IndexId);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ids.IndexId);
-			//if (nGL::IsThereAnError("cVertexAttributeDesc::GenerateBuffers"))
-				//return false;
 
 			int bytesInIndexArray = indices.size() * sizeof(GLuint);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, bytesInIndexArray, &indices[0], GL_STATIC_DRAW);
@@ -105,15 +99,14 @@ namespace nGraphics
 			for (int idx = 0; idx < ids.NumBufferIds; idx++)
 				glBindBuffer(GL_ARRAY_BUFFER, ids.BufferIds[idx]);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ids.IndexId);
-			// ids.NumBufferIds doesn't include the vertex, so we start at 0 and go to <= ids.NumBufferIds
 			for (int idx = 0; idx <= ids.NumBufferIds; idx++)
 				glEnableVertexAttribArray(idx);
 
-			glVertexAttribPointer(0,		// index or "slot" in the shader
+			glVertexAttribPointer(0,		// shader index
 				Vertex.NumVariables,		// Number of variables: vec4 would be 4 32-bit variables
 				Vertex.Type,				// Type: vec4 is float
-				Vertex.Normalize,			// "normalize" the values (or not)
-				mVertexByteSize,			// Number of bytes per vertex (the "stride")
+				Vertex.Normalize,			//Bool telling the function if the values have to be normalized
+				mVertexByteSize,			// Number of bytes per vertex
 				(GLvoid*)0);				// Offset from vertex (position is first, so offset = 0)
 
 			int offset = Vertex.ByteSize;

@@ -2,6 +2,8 @@
 #include <graphics/load/LoadCubeMapFromFiles.h>
 #include <graphics/load/cImageFile.h>
 
+//Will leave the cube map functions in case I get to use them 
+//I will try
 namespace nGraphics
 {
 	GLuint LoadCubeMapFromFiles(
@@ -38,24 +40,22 @@ namespace nGraphics
 			delete image;
 			return 0;
 		}
-
 		
 		glTexSubImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X,
 			0,   // Level
 			0, 0, // Offset
-			image->GetImageWidth(),	// width
-			image->GetImageHeight(), // height
+			image->GetImageWidth(),
+			image->GetImageHeight(),
 			GL_RGBA,
 			GL_UNSIGNED_BYTE,
 			image->GetTextureData());
 
-		// Negative X image...
 		if (image->LoadFromFile(negX_fileName))
 		{
 			glTexSubImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 
 				0, 0, 0,
-				image->GetImageWidth(),	// width
-				image->GetImageHeight(), // height
+				image->GetImageWidth(),
+				image->GetImageHeight(),
 				GL_RGBA,
 				GL_UNSIGNED_BYTE, 
 				image->GetTextureData());
@@ -66,13 +66,12 @@ namespace nGraphics
 			return 0;
 		}
 
-		// Positive Y image...
 		if (image->LoadFromFile(posY_fileName))
 		{
 			glTexSubImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
 				0, 0, 0,
-				image->GetImageWidth(),	// width
-				image->GetImageHeight(), // height
+				image->GetImageWidth(),
+				image->GetImageHeight(),
 				GL_RGBA,
 				GL_UNSIGNED_BYTE,
 				image->GetTextureData());
@@ -83,13 +82,12 @@ namespace nGraphics
 			return 0;
 		}
 
-		// Negative Y image...
 		if (image->LoadFromFile(negY_fileName))
 		{
 			glTexSubImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
 				0, 0, 0,
-				image->GetImageWidth(),	// width
-				image->GetImageHeight(), // height
+				image->GetImageWidth(),
+				image->GetImageHeight(),
 				GL_RGBA,
 				GL_UNSIGNED_BYTE,
 				image->GetTextureData());
@@ -100,13 +98,12 @@ namespace nGraphics
 			return 0;
 		}
 
-		// Positive Z image...
 		if (image->LoadFromFile(posZ_fileName))
 		{
 			glTexSubImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
 				0, 0, 0,
-				image->GetImageWidth(),	// width
-				image->GetImageHeight(), // height
+				image->GetImageWidth(),
+				image->GetImageHeight(),
 				GL_RGBA,
 				GL_UNSIGNED_BYTE,
 				image->GetTextureData());
@@ -117,13 +114,12 @@ namespace nGraphics
 			return 0;
 		}
 
-		// Negative Z image...
 		if (image->LoadFromFile(negZ_fileName))
 		{
 			glTexSubImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z,
 				0, 0, 0,
-				image->GetImageWidth(),	// width
-				image->GetImageHeight(), // height
+				image->GetImageWidth(),
+				image->GetImageHeight(),
 				GL_RGBA,
 				GL_UNSIGNED_BYTE,
 				image->GetTextureData());

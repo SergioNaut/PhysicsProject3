@@ -1,7 +1,7 @@
 #include <graphics/cCamera.h>
 #include <input/input.h> 
 namespace nGraphics
-{
+{	//Stays the same, but there are a few changes in c3rdPersonCamera
 	sCameraDef::sCameraDef()
 	{
 		ElasticYaw = false;
@@ -110,7 +110,7 @@ namespace nGraphics
 			mYaw = glm::clamp(mYaw, mMinYaw, mMaxYaw);
 		}
 		nInput::SetMousePosition(mWidth / 2, mHeight / 2);
-		// mouse movement up and down PITCH
+		// mouse movement up and down pitch
 		float pitchSpeed = mPitchSpeed * (diffY / mWidth);
 		if (mInvertPitch)
 		{
@@ -145,7 +145,7 @@ namespace nGraphics
 		offset = glm::normalize(offset) * mDistance;
 		// set the eye position to the target's position, plus our perfectly placed offset
 		glm::vec3 eye(target.x + offset.x, target.y + offset.y, target.z + offset.z);
-		// view!
+
 		mViewMatrix = glm::lookAtRH(eye, target, up);
 		// set secondary values
 		mForwardAxis = glm::normalize(target - eye);

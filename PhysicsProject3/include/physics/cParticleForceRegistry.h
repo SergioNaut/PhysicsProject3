@@ -1,5 +1,4 @@
 #pragma once
-
 #include "cParticle.h"
 #include "iParticleForceGenerator.h"
 

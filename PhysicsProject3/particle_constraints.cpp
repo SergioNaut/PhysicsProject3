@@ -6,9 +6,7 @@ namespace nPhysics
 	cParticleConstraint::cParticleConstraint(cParticle* particleA, cParticle* particleB)
 		: mParticleA(particleA)
 		, mParticleB(particleB)
-	{
-
-	}
+	{}
 
 	cParticleConstraint::~cParticleConstraint() {}
 
@@ -35,7 +33,7 @@ namespace nPhysics
 
 	size_t cParticleRodConstraint::AddContact(cParticleContact* contact, size_t limit, std::vector<cParticle*>& particles) const
 	{
-		// find the current length of the rod
+		// Find the current length of the rod
 		float currentLen = CurrentSeparation();
 
 		// Check if we're over-extended

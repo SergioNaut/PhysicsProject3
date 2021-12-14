@@ -46,9 +46,7 @@ namespace nGraphics
 		, mUniformId_EyePosition(0)
 		, mUniformId_IsCubeMap(0)
 		, mUniformId_CubeMap(0)
-	{
-
-	}
+	{}
 
 	cLitShader::~cLitShader()
 	{
@@ -86,16 +84,19 @@ namespace nGraphics
 		// per item
 		mUniformId_ModelMatrix = glGetUniformLocation(mProgramId, "ModelMatrix");
 
+		//Setting up material properties
 		mUniformId_Material.TexDiffuse = glGetUniformLocation(mProgramId, "material.diffuse");
 		mUniformId_Material.TexSpecular = glGetUniformLocation(mProgramId, "material.specular");
 		mUniformId_Material.Shininess = glGetUniformLocation(mProgramId, "material.shininess");
 		mUniformId_Material.MeshColor = glGetUniformLocation(mProgramId, "material.meshColor");
 
+		//Directional Light
 		mUniformId_DirLight.Direction = glGetUniformLocation(mProgramId, "dirLight.direction");
 		mUniformId_DirLight.Ambient = glGetUniformLocation(mProgramId, "dirLight.ambient");
 		mUniformId_DirLight.Diffuse = glGetUniformLocation(mProgramId, "dirLight.diffuse");
 		mUniformId_DirLight.Specular = glGetUniformLocation(mProgramId, "dirLight.specular");
 
+		//Spotlight
 		mUniformId_SpotLight.Position = glGetUniformLocation(mProgramId, "spotLight.position");
 		mUniformId_SpotLight.Direction = glGetUniformLocation(mProgramId, "spotLight.direction");
 		mUniformId_SpotLight.Ambient = glGetUniformLocation(mProgramId, "spotLight.ambient");
