@@ -1,4 +1,3 @@
-#include <graphics/gl_errors.h>
 #include <graphics/cTextureManager.h>
 #include <graphics/load/LoadTextureFromFile.h>
 #include <graphics/load/LoadCubeMapFromFiles.h>
@@ -46,7 +45,6 @@ namespace nGraphics
 			std::string negZ(file + "_lf.tga");
 			std::string negX(file + "_bk.tga");
 			std::string posZ(file + "_rt.tga");
-			CheckErrors();
 			id = LoadCubeMapFromFiles(posX.c_str(), negX.c_str(), posY.c_str(), negY.c_str(), posZ.c_str(), negZ.c_str(), true);
 		}
 		else
@@ -67,7 +65,6 @@ namespace nGraphics
 
 	bool cTextureManager::Load(std::vector<sTextureLoadingInfo>& loadingInfos)
 	{
-		CheckErrors();
 		bool result(true);
 		Unload();
 		std::vector<sTextureLoadingInfo>::iterator it = loadingInfos.begin();

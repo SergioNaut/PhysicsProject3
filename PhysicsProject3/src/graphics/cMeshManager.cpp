@@ -2,7 +2,6 @@
 #include <graphics/load/LoadSingleMeshFromFile.h>
 #include <iostream>
 
-
 namespace nGraphics
 {
 	cMeshManager* cMeshManager::mInstance = 0;

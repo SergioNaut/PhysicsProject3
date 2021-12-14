@@ -12,10 +12,10 @@ namespace nGraphics
 		cSimpleShader();
 		virtual ~cSimpleShader();
 		
-		// load it up!
 		bool Load();
+
 		// deletes and cleans up stuff
-		// dtor will call this
+		//Called by the destructor
 		void Close();
 		void Bind();
 
@@ -32,13 +32,10 @@ namespace nGraphics
 		inline GLuint GetUniform_ModelColor() const { return mUniformId_ModelColor; }
 		inline GLuint GetUniform_TexFactors() const { return mUniformId_TexFactors; }
 		inline GLuint GetUniform_TexDiffuse() const { return mUniformId_TexDiffuse; }
-		
-		
 		// per-frame
 		inline void SetUniform_ViewMatrix(const float* m) { glUniformMatrix4fv(mUniformId_ViewMatrix, 1, GL_FALSE, m); }
 		inline void SetUniform_ProjectionMatrix(const float* m) { glUniformMatrix4fv(mUniformId_ProjectionMatrix, 1, GL_FALSE, m); }
 		inline void SetUniform_EyePosition(const float* v) { glUniform4fv(mUniformId_EyePosition, 1, v); }
-		
 		// per-entity
 		inline void SetUniform_IsCubeMap(int b) { glUniform1i(mUniformId_IsCubeMap, b); }
 		inline void SetUniform_CubeMap(cTexture* tex) 

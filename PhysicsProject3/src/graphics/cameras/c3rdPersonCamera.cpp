@@ -3,7 +3,6 @@
 
 namespace nGraphics
 {
-
 	s3rdPersonCameraDef::s3rdPersonCameraDef()
 	{
 		ElasticYaw = false;
@@ -32,10 +31,7 @@ namespace nGraphics
 		Setup(s3rdPersonCameraDef());
 	}
 
-	c3rdPersonCamera::~c3rdPersonCamera()
-	{
-
-	}
+	c3rdPersonCamera::~c3rdPersonCamera(){}
 
 	void c3rdPersonCamera::Setup(const s3rdPersonCameraDef& def)
 	{

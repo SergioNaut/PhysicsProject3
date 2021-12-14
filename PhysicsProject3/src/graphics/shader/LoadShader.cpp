@@ -1,8 +1,5 @@
 #include <extern_includes.h>
 #include <graphics/shader/LoadShader.h>
-
-
-// std
 #include <string>
 #include <vector>
 #include <iostream>

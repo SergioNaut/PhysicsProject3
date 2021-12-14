@@ -1,7 +1,5 @@
 #pragma once
 #include <extern_includes.h>
-
-// std
 #include <string>
 
 namespace nGraphics

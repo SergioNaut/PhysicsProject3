@@ -1,5 +1,4 @@
 #pragma once
-
 #include <graphics/shader/shader_vars.h>
 #include <string>
 

@@ -1,6 +1,4 @@
 #pragma once
-
-// std
 #include <string>
 
 namespace nGraphics

@@ -3,9 +3,9 @@
 
 namespace nGraphics
 {
-	/**
+	/*
 		helper struct to contain buffer ids
-		shouldn't be used outside of the graphics engine
+		Used only for the graphics engine
 	*/
 	struct sBufferIds
 	{

@@ -1,5 +1,4 @@
 #pragma once
-
 #include <extern_includes.h>
 #include <graphics/cTexture.h>
 
@@ -31,6 +30,8 @@ namespace nGraphics
 	};
 
 	// JAMES BEGIN
+#pragma region ProfessorsStructs
+
 	struct sMaterial
 	{
 		cTexture* TexDiffuse;
@@ -82,5 +83,7 @@ namespace nGraphics
 		sPointLight Point[MAX_POINT_LIGHTS];
 		sSpotLight Spot;
 	};
-	// JAMES END
+
+#pragma endregion
+
 }

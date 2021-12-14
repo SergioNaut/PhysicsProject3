@@ -66,9 +66,6 @@
     <ClCompile Include="src\graphics\cVertex.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\gl_errors.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\graphics.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
@@ -159,9 +156,6 @@
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="include\graphics\cVertex.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="include\graphics\gl_errors.h">
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="include\graphics\graphics.h">

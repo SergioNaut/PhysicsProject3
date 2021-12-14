@@ -1,7 +1,5 @@
 #include <graphics/load/LoadSingleMeshFromFile.h>
 #include <graphics/load/Assimp.h>
-
-// std
 #include <iostream>
 
 namespace nGraphics

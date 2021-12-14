@@ -19,7 +19,7 @@ namespace nGraphics
 	extern GLFWwindow* gWindow;
 	extern iCamera* gCamera;  // to be set by the app
 
-	// helpers, just calls gMatrixStack
+	// helpers that calls gMatrixStack
 	void ClearStack();
 	void PushStack(const glm::mat4& modelMatrix);
 	void PopStack();

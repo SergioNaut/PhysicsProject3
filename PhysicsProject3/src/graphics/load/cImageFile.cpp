@@ -1,8 +1,6 @@
 #pragma once
 #include <extern_includes.h>
 #include <graphics/load/cImageFile.h>
-
-// std
 #include <iostream>
 
 namespace nGraphics

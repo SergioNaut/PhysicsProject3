@@ -157,7 +157,6 @@ copy /Y "$(SolutionDir)Extern\FreeImage\lib\x64\Debug\FreeImaged.dll" "$(OutDir)
     <ClCompile Include="src\graphics\cTexture.cpp" />
     <ClCompile Include="src\graphics\cTextureManager.cpp" />
     <ClCompile Include="src\graphics\cVertex.cpp" />
-    <ClCompile Include="src\graphics\gl_errors.cpp" />
     <ClCompile Include="src\graphics\graphics.cpp" />
     <ClCompile Include="src\graphics\load\cImageFile.cpp" />
     <ClCompile Include="src\graphics\load\LoadCubeMapFromFiles.cpp" />
@@ -188,7 +187,6 @@ copy /Y "$(SolutionDir)Extern\FreeImage\lib\x64\Debug\FreeImaged.dll" "$(OutDir)
     <ClInclude Include="include\graphics\cTexture.h" />
     <ClInclude Include="include\graphics\cTextureManager.h" />
     <ClInclude Include="include\graphics\cVertex.h" />
-    <ClInclude Include="include\graphics\gl_errors.h" />
     <ClInclude Include="include\graphics\graphics.h" />
     <ClInclude Include="include\graphics\iCamera.h" />
     <ClInclude Include="include\graphics\load\Assimp.h" />

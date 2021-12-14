@@ -2,8 +2,6 @@
 #include <extern_includes.h>
 #include <graphics/sTextureLoadingInfo.h>
 #include <graphics/cTexture.h>
-
-// std
 #include <vector>
 
 namespace nGraphics

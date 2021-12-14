@@ -28,10 +28,7 @@ namespace nGraphics
 		Setup(sCameraDef());
 	}
 
-	cCamera::~cCamera()
-	{
-
-	}
+	cCamera::~cCamera(){}
 
 	void cCamera::Setup(const sCameraDef& def)
 	{
@@ -127,17 +124,6 @@ namespace nGraphics
 		{
 			mPitch = glm::clamp(mPitch, mMinPitch, mMaxPitch);
 		}
-		// UP and DOWN keys for zooming IN and OUT
-		/*bool pressUp = nInput::IsKeyDown::Up();
-		bool pressDown = nInput::IsKeyDown::Down();
-		if (pressDown != pressUp)
-		{
-			float zoomSpeed = mZoomSpeed;
-			if (pressUp) zoomSpeed *= -1.f;
-			mDistance += zoomSpeed * dt;
-			if (mDistance < mMinDistance) mDistance = mMinDistance;
-			if (mDistance > mMaxDistance) mDistance = mMaxDistance;
-		}*/
 	}
 
 	void cCamera::UpdateView()

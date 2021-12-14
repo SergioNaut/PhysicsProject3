@@ -3,9 +3,6 @@
 
 namespace nGraphics
 {
-	/*
-		a mesh vertex with a position, normal, texcoord0, texcoord1
-	*/
 	class cVertex
 	{
 	public:
